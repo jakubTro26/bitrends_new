@@ -99,7 +99,7 @@ $lgx_event_point_ft_col = $lgx_event_point_opt->lgx_event_point_footer_col();
                             <?php endif; ?>
                         </ul>
                     </div>
-                    <p class="lgx-copyright">
+                    <p class="lgx-copyright t">
                         <?php if(!empty($lgx_event_point_ft_copy)): ?>
                             <?php echo 'Wszelkie prawa zastrzeżone 2018' ?>
                         <?php endif; ?>
