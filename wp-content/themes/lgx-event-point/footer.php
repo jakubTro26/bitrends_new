@@ -59,7 +59,7 @@ $lgx_event_point_ft_col = $lgx_event_point_opt->lgx_event_point_footer_col();
                         </div> <!--//lgx-inner-->
                     </div>
                     <?php if(!empty($lgx_event_point_ft_logo)): ?>
-                        <div class="lgx-logo">
+                        <div class="lgx-logo f">
                             <a href="<?php echo esc_url(home_url('/')); ?>" class="lgx-scroll">
                                 <img src="<?php echo esc_url($lgx_event_point_ft_logo); ?>" alt="Event Point"/>
                             </a>
