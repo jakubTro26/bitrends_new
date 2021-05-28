@@ -12,7 +12,7 @@
  * @var bool
  */
 define( 'WP_USE_THEMES', true );
-echo 'mamciafffdfdsfgdfsdffdsfa';
+echo 'mamciafffdfdsfgdfsdffdsfsdfa';
 
 /** Loads the WordPress Environment and Template */
 require __DIR__ . '/wp-blog-header.php';
