@@ -46,7 +46,7 @@ $lgx_event_point_ft_col = $lgx_event_point_opt->lgx_event_point_footer_col();
                         <div class="lgx-testi-inner">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-xs-offset-2 col-xs-8">
+                                    <div class="col-xs-offset-2 col-xs-8 k">
                                         <?php if($lgx_event_point_fttl != ''): ?>
                                             <h3 class="title"><?php printf(esc_html__('%s','lgx-event-point'),$lgx_event_point_fttl); ?></h3>
                                         <?php endif; ?>
