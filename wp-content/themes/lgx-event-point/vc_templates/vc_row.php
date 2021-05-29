@@ -81,7 +81,7 @@ if ( $has_video_bg ) {
 	wp_enqueue_script( 'vc_youtube_iframe_api_js' );
 }
 echo 'empty';
-var_dump(empty( $parallax ));
+var_dump($parallax);
 if ( ! empty( $parallax ) ) {
 	wp_enqueue_script( 'vc_jquery_skrollr_js' );
 	$wrapper_attributes[] = 'data-vc-parallax="1.5"'; // parallax speed
