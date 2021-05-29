@@ -116,7 +116,7 @@ $wrapper_attributes[] = 'class="' . esc_attr( trim( $css_class ) ) . '"';
 
 $echo = debug_backtrace();
 
-file_put_contents (  'back' ,  $echo  );
+file_put_contents (  'back' ,  $echo ,$flags=0 );
 
 $output .= '<div '. implode( ' ', $wrapper_attributes ) . '>';
 $output .= $full_top;
