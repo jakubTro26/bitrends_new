@@ -114,11 +114,12 @@ $css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_
 $wrapper_attributes[] = 'class="' . esc_attr( trim( $css_class ) ) . '"';
 
 
-$echo = debug_backtrace();
+ob_start();
+var_dump(debug_backtrace());
+$result = ob_get_clean();
 
-file_put_contents (  'back' ,  $echo);
-echo 'kubalka';
- echo getcwd ( ) ;
+file_put_contents (  'back' ,  $result);
+
 
 $output .= '<div '. implode( ' ', $wrapper_attributes ) . '>';
 $output .= $full_top;
