@@ -34,13 +34,13 @@ function lgx_schedule_function($atts) {
                             $terms = get_terms($taxonomy); // Get all terms of a taxonomy
                             $i = 1;
                             if ( $terms && !is_wp_error( $terms ) ) :
-
+                                var_dump($terms);
                                 ?>
                                 <ul class="nav nav-pills text-center">
                                     <?php foreach ( $terms as $term ):   ?>
                                         <li <?php echo ($i == 1) ?  'class="active"' : '' ;?> >
                                             <a data-toggle="pill" href="#schedule<?php echo $term->term_id; ?>">
-                                                <h3><?php echo $term; echo lgx_spilt_heading($term->name); ?></h3>
+                                                <h3><?php  echo lgx_spilt_heading($term->name); ?></h3>
                                                 <p><?php echo lgx_spilt_heading($term->description, 'left'); ?></p>
                                             </a>
                                         </li>
