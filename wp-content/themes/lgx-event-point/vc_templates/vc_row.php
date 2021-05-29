@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 $el_class = $full_height = $full_width = $content_placement = $parallax = $parallax_image = $css = $el_id = $video_bg = $video_bg_url = $video_bg_parallax  = $enable_full_screen = '';
 $output = $after_output = '';
-
+echo 'paralax';
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 extract( $atts );
 
