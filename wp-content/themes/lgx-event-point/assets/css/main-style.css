@@ -1062,16 +1062,16 @@ button {
   display: block;
 }
 .lgx-banner .lgx-countdown-area #lgx-countdown .lgx-days {
-  color: #fff200;
+  color: #1a233a;
 }
 .lgx-banner .lgx-countdown-area #lgx-countdown .lgx-hr {
-  color: #ff8a00;
+  color: #0f0c08;
 }
 .lgx-banner .lgx-countdown-area #lgx-countdown .lgx-min {
-  color: #00b9ff;
+  color: #050a0c;
 }
 .lgx-banner .lgx-countdown-area #lgx-countdown .lgx-sec {
-  color: #8dc63f;
+  color: #121a08;
 }
 .lgx-banner-typed .title {
   font-family: 'Oswald', sans-serif;
