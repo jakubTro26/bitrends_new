@@ -26,10 +26,10 @@ function lgx_hook_inHeader() {
     $sldr_bnr_sec  = (!empty($lgx_event_point['cntnt-date-sec-clr'])) ? $lgx_event_point['cntnt-date-sec-clr'] : '#8dc63f';
 
     // Typed default banner countdown color
-    $typd_bnr_day   = (!empty($lgx_event_point['typ-date-day-clr'])) ? $lgx_event_point['typ-date-day-clr'] : '#58b9aa';
-    $typd_bnr_hour   = (!empty($lgx_event_point['typ-date-hour-clr'])) ? $lgx_event_point['typ-date-hour-clr'] : '#ff8a00';
-    $typd_bnr_min  = (!empty($lgx_event_point['typ-date-min-clr'])) ? $lgx_event_point['typ-date-min-clr'] : '#00b9ff';
-    $typd_bnr_sec  = (!empty($lgx_event_point['typ-date-sec-clr'])) ? $lgx_event_point['typ-date-sec-clr'] : '#8dc63f';
+    $typd_bnr_day   = (!empty($lgx_event_point['typ-date-day-clr'])) ? $lgx_event_point['typ-date-day-clr'] : '#901f79';
+    $typd_bnr_hour   = (!empty($lgx_event_point['typ-date-hour-clr'])) ? $lgx_event_point['typ-date-hour-clr'] : '#58b9aa';
+    $typd_bnr_min  = (!empty($lgx_event_point['typ-date-min-clr'])) ? $lgx_event_point['typ-date-min-clr'] : '#901f79';
+    $typd_bnr_sec  = (!empty($lgx_event_point['typ-date-sec-clr'])) ? $lgx_event_point['typ-date-sec-clr'] : '#58b9aa';
 
     $brand_rgb  = lgxl_themential_point_hex2rgb($brand_color);
     $btn_rgb  = lgxl_themential_point_hex2rgb($btn_color);
