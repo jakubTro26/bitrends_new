@@ -59,7 +59,7 @@ if ( ! function_exists( 'lgx_spilt_heading' ) ) {
         $output =  $heading_first . ' <span>' . $heading_last . '</span>';
 
         if($type == 'left') {
-      
+            echo $output;
             $output = '<span>'. $heading_first . ' </span>' . $heading_last ;
         }
         return $output;
