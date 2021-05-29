@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 $el_class = $full_height = $full_width = $content_placement = $parallax = $parallax_image = $css = $el_id = $video_bg = $video_bg_url = $video_bg_parallax  = $enable_full_screen = '';
 $output = $after_output = '';
-echo 'paralax';
+
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 extract( $atts );
 
@@ -80,7 +80,8 @@ if ( $has_video_bg ) {
 	$css_classes[] = ' vc_video-bg-container';
 	wp_enqueue_script( 'vc_youtube_iframe_api_js' );
 }
-
+echo 'empty';
+var_dump(empty( $parallax ));
 if ( ! empty( $parallax ) ) {
 	wp_enqueue_script( 'vc_jquery_skrollr_js' );
 	$wrapper_attributes[] = 'data-vc-parallax="1.5"'; // parallax speed
