@@ -80,8 +80,7 @@ if ( $has_video_bg ) {
 	$css_classes[] = ' vc_video-bg-container';
 	wp_enqueue_script( 'vc_youtube_iframe_api_js' );
 }
-echo 'empty';
-var_dump($parallax);
+//epmty
 if ( ! empty( $parallax ) ) {
 	wp_enqueue_script( 'vc_jquery_skrollr_js' );
 	$wrapper_attributes[] = 'data-vc-parallax="1.5"'; // parallax speed
@@ -114,6 +113,8 @@ if ( ! $parallax && $has_video_bg ) {
 $css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, implode( ' ', array_filter( $css_classes ) ), $this->settings['base'], $atts ) );
 $wrapper_attributes[] = 'class="' . esc_attr( trim( $css_class ) ) . '"';
 
+echo 'output123';
+var_dump($output);
 
 $output .= '<div '. implode( ' ', $wrapper_attributes ) . '>';
 $output .= $full_top;
