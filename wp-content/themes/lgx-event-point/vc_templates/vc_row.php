@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 $el_class = $full_height = $full_width = $content_placement = $parallax = $parallax_image = $css = $el_id = $video_bg = $video_bg_url = $video_bg_parallax  = $enable_full_screen = '';
 $output = $after_output = '';
+
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 extract( $atts );
 
@@ -95,7 +96,9 @@ if ( ! empty( $parallax ) ) {
 if ( ! empty( $parallax_image ) ) {
 	if ( $has_video_bg ) {
 		$parallax_image_src = $parallax_image;
+		
 	} else {
+	
 		$parallax_image_id = preg_replace( '/[^\d]/', '', $parallax_image );
 		$parallax_image_src = wp_get_attachment_image_src( $parallax_image_id, 'full' );
 		if ( ! empty( $parallax_image_src[0] ) ) {
