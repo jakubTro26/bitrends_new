@@ -37,8 +37,7 @@ function lgx_schedule_function($atts) {
 
                                 ?>
                                 <ul class="nav nav-pills text-center">
-                                    <?php foreach ( $terms as $term ):  
-                                        echo $term ?>
+                                    <?php foreach ( $terms as $term ):   ?>
                                         <li <?php echo ($i == 1) ?  'class="active"' : '' ;?> >
                                             <a data-toggle="pill" href="#schedule<?php echo $term->term_id; ?>">
                                                 <h3><?php echo lgx_spilt_heading($term->name); ?></h3>
