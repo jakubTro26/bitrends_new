@@ -4,8 +4,8 @@ add_action ('wp_head','lgx_hook_inHeader');
 function lgx_hook_inHeader() {
     global $lgx_event_point;
 
-    $brand_color = (!empty($lgx_event_point['color-opt'])) ? $lgx_event_point['color-opt'] : '#dc4e41' ;
-    $btn_color   = (!empty($lgx_event_point['btncolor-opt'])) ? $lgx_event_point['btncolor-opt'] : '#42bd41' ;
+    $brand_color = (!empty($lgx_event_point['color-opt'])) ? $lgx_event_point['color-opt'] : '#58b9aa' ;
+    $btn_color   = (!empty($lgx_event_point['btncolor-opt'])) ? $lgx_event_point['btncolor-opt'] : '#901f79' ;
 
     // default banner countdown color
     $dflt_bnr_day   = (!empty($lgx_event_point['dflt-date-day-clr'])) ? $lgx_event_point['dflt-date-day-clr'] : '#58b9aa';
