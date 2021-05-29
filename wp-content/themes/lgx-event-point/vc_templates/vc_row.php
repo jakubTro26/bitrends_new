@@ -116,7 +116,7 @@ echo 'x123';
 
 var_dump(debug_backtrace());
 
-echo 'x123';
+echo 'x234';
 
 $output .= '<div '. implode( ' ', $wrapper_attributes ) . '>';
 $output .= $full_top;
