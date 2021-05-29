@@ -413,7 +413,7 @@ function lgx_event_point_scripts() {
       'grdnt_day' =>  (!empty($lgx_event_point['grdnt-date-day-clr'])) ? $lgx_event_point['grdnt-date-day-clr'] : '#ff8a00',  
       'grdnt_hour' =>  (!empty($lgx_event_point['grdnt-date-hour-clr'])) ? $lgx_event_point['grdnt-date-hour-clr'] : '#dc4e41',  
       'grdnt_min' =>  (!empty($lgx_event_point['grdnt-date-min-clr'])) ? $lgx_event_point['grdnt-date-min-clr'] : '#00b9ff',  
-      'grdnt_sec' =>  (!empty($lgx_event_point['grdnt-date-sec-clr'])) ? $lgx_event_point['grdnt-date-sec-clr'] : '#42bd41', 
+      'grdnt_sec' =>  (!empty($lgx_event_point['grdnt-date-sec-clr'])) ? $lgx_event_point['grdnt-date-sec-clr'] : '#58b9aa', 
       'days' =>  __('Day\'s','lgx-event-point'),
       'hours' =>  __('Hour\'s','lgx-event-point'),
       'minutes' =>  __('Minute\'s','lgx-event-point'),
