@@ -596,6 +596,7 @@ class RevSliderBase {
 					$upload_dir = wp_upload_dir();
 					$cont_url = $upload_dir['baseurl'];
 					$image = str_replace('uploads/uploads/', 'uploads/', $cont_url . '/' . $image);
+					echo 'image123' . $image;
 				}
 			}
 		}
