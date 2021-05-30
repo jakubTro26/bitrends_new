@@ -41,7 +41,7 @@
         /*=========================================================================
          ===  Circular CountDown
          ========================================================================== */
-        if ( $('#circular-countdown').length ) {
+        if ( $('    ').length ) {
             var gday = lgxScript.grdnt_day;
             var hour = lgxScript.grdnt_hour;
             var min = lgxScript.grdnt_min;
@@ -83,13 +83,17 @@
         /*=========================================================================
          ===  countdown
          ========================================================================== */
-        if ( $('#lgx-countdown').length ) {
+        console.log($('#lgx-countdown'));
+      
+      
+         if ( $('#lgx-countdown').length ) {
 
             var dataTime = $('#lgx-countdown').data('date'); // Date Format : Y/m/d
             var day = lgxScript.days;
             var hour = lgxScript.hours;
             var minute = lgxScript.minutes;
             var sec = lgxScript.secs;
+
 
             $('#lgx-countdown').countdown(dataTime, function(event) {
                 var $this = $(this).html(event.strftime(''
