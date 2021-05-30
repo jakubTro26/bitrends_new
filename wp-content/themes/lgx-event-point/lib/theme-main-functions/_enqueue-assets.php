@@ -419,6 +419,9 @@ function lgx_event_point_scripts() {
       'minutes' =>  __('Minute\'s','lgx-event-point'),
       'secs' =>  __('Second\'s','lgx-event-point')
     );
+    echo 'lgxloc';
+    var_dump($lgx_loc_scirpt);
+
     wp_localize_script( 'lgx-event-point-script', 'lgxScript', $lgx_loc_scirpt ); 
 
 }
