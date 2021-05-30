@@ -55,7 +55,8 @@ if ( ! function_exists( 'lgx_spilt_heading' ) ) {
             $heading_first = isset( $heading_arr[0] ) ? $heading_arr[0] : '';
             unset( $heading_arr[0] );
             $heading_last = implode( $heading_arr );
-            echo $heading_last;
+
+            var_dump($heading_arr);
         }
 
         $output =  $heading_first . ' <span>' . $heading_last . '</span>';
