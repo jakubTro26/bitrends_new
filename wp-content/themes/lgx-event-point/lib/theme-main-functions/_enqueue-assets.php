@@ -115,7 +115,7 @@ function lgx_event_point_scripts() {
     wp_enqueue_script( 'easing', LGXEVENTPOINT_VENDOR . 'jquery.easing.min.js', array(), '1.0', true );
     wp_enqueue_script( 'lgx-event-point-typed', LGXEVENTPOINT_VENDOR . 'typed/typed.min.js', array(), '1.0', true );
 
-    wp_enqueue_script( 'lgx-event-point-script', LGXEVENTPOINT_SCRIPT . 'lgx-theme-main.js?v=1', array(), '1.0', true );
+    wp_enqueue_script( 'lgx-event-point-script', LGXEVENTPOINT_SCRIPT . 'lgx-theme-main.js?v=1', array(), rand(1, 100), true );
     wp_enqueue_script( 'lgx-event-point-navigation', LGXEVENTPOINT_SCRIPT . 'navigation.js', array(), '20151215', true );
     wp_enqueue_script( 'lgx-event-point-skip-link-focus-fix',  LGXEVENTPOINT_SCRIPT .'skip-link-focus-fix.js', array(), '20151215', true );
 
