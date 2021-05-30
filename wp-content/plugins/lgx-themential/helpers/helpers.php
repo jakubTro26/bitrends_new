@@ -49,7 +49,7 @@ if ( ! function_exists( 'lgx_spilt_heading' ) ) {
         $heading_first = '';
         $heading_last  = '';
         $heading_str   = trim( $heading );
-        echo 'head123f';
+        echo 'head123df';
         echo $heading;
         if ( isset( $heading_str ) && ! empty( $heading_str ) ) {
             $heading_arr   = explode( " ", $heading_str );
