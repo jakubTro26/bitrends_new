@@ -42,6 +42,7 @@ function lgx_schedule_function($atts) {
                                             <a data-toggle="pill" href="#schedule<?php echo $term->term_id; ?>">
                                                 <h3><?php  echo lgx_spilt_heading($term->name); 
                                                 echo $term->name;
+                                                var_dump($terms);
                                                 ?></h3>
                                                 <p><?php echo lgx_spilt_heading($term->description, 'left'); ?></p>
                                             </a>
