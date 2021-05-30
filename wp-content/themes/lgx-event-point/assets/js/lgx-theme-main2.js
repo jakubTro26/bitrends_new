@@ -5,6 +5,7 @@
 
     $(document).ready(function() {
         console.log(lgxScript);
+        console.log('kuba');
             // gallery slider
         $(".slider-container").ikSlider({
           speed: 500

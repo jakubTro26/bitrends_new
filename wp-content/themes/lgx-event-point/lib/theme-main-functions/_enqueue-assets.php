@@ -405,7 +405,7 @@ function lgx_event_point_scripts() {
     $lgx_event_point_adv_js = (isset($lgx_event_point['custom_js'])) ? $lgx_event_point['custom_js'] : '' ;
  
     $lgx_event_point_custom_js .= "{$lgx_event_point_adv_js}";
-    echo 'inline123' . $lgx_event_point_custom_js;
+    
     wp_add_inline_script( 'lgx-event-point-script', $lgx_event_point_custom_js );
 
     // Localize the script
