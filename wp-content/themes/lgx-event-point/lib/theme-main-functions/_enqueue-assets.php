@@ -78,7 +78,7 @@ function lgx_event_point_scripts() {
     $lgx_event_point_opt = new LgxFrameworkOpt();
     $lgx_event_point_banner = $lgx_event_point_opt->lgx_event_point_page_banner();
     echo 'lgx123';
-    var_dump($lgx_event_point_banner);
+    var_dump($lgx_event_point_opt);
     $lgx_event_map_apikey = (!empty($lgx_event_point['lgx_map_key'])) ? $lgx_event_point['lgx_map_key'] : '';
     // LOAD FONTS
     wp_enqueue_style( 'lgx-event-point-fonts', lgx_event_point_fonts_url(), array(), '1.0.0' );
