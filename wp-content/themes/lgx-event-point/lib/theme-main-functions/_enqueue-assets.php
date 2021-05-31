@@ -111,7 +111,7 @@ function lgx_event_point_scripts() {
     wp_enqueue_script( 'gmap', LGXEVENTPOINT_VENDOR . 'gmap/jquery.googlemap.js', array(), '1.0', true );
     wp_enqueue_script( 'maginificpopup', LGXEVENTPOINT_VENDOR . 'maginificpopup/jquery.magnific-popup.min.js', array(), '1.0', true );
     wp_enqueue_script( 'owlcarousel', LGXEVENTPOINT_VENDOR . 'owlcarousel/owl.carousel.min.js', array(), '1.0', true );
-    wp_enqueue_script( 'countdown', LGXEVENTPOINT_VENDOR . 'countdown.js', array(), '1.0', true ); 
+    wp_enqueue_script( 'countdown', LGXEVENTPOINT_VENDOR . 'countdown.js', array(), rand(1, 100), true ); 
     wp_enqueue_script( 'TimeCircles', LGXEVENTPOINT_VENDOR . 'timer/TimeCircles.js', array(), '1.0', true ); 
     wp_enqueue_script( 'easing', LGXEVENTPOINT_VENDOR . 'jquery.easing.min.js', array(), '1.0', true );
     wp_enqueue_script( 'lgx-event-point-typed', LGXEVENTPOINT_VENDOR . 'typed/typed.min.js', array(), '1.0', true );
