@@ -205,10 +205,7 @@
       delete this.$el.data().countdownInstance;
     },
     setFinalDate: function(value) {
-      var theBigDay = new Date("June 31, 2021");
-      
-      //this.finalDate = parseDateString(value); // Cast the given date
-      this.finalDate=theBigDay;
+      this.finalDate = parseDateString(value); // Cast the given date
     },
     update: function() {
       // Stop if dom is not in the html (Thanks to @dleavitt)
