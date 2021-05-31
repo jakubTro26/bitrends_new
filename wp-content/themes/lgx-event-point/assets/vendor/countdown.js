@@ -205,7 +205,7 @@
       delete this.$el.data().countdownInstance;
     },
     setFinalDate: function(value) {
-      var theBigDay = new Date("December 14, 2021");
+      var theBigDay = new Date("December 13, 2021");
       
       //this.finalDate = parseDateString(value); // Cast the given date
       this.finalDate=theBigDay;
