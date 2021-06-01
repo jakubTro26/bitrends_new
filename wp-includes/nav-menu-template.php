@@ -258,6 +258,10 @@ function wp_nav_menu( $args = array() ) {
 	 * @param string   $items The HTML list content for the menu items.
 	 * @param stdClass $args  An object containing wp_nav_menu() arguments.
 	 */
+
+	echo 'items';
+	var_dump($items);
+
 	$items = apply_filters( "wp_nav_menu_{$menu->slug}_items", $items, $args );
 
 	// Don't print any markup if there are no items at this point.
@@ -267,8 +271,7 @@ function wp_nav_menu( $args = array() ) {
 	
 	
 	
-	echo 'items';
-	var_dump($items);
+	
 	
 	$nav_menu .= sprintf( $args->items_wrap, esc_attr( $wrap_id ), esc_attr( $wrap_class ), $items );
 	unset( $items );
