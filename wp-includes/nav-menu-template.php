@@ -258,6 +258,9 @@ function wp_nav_menu( $args = array() ) {
 	 * @param string   $items The HTML list content for the menu items.
 	 * @param stdClass $args  An object containing wp_nav_menu() arguments.
 	 */
+
+	echo 'items';
+	var_dump($items);
 	$items = apply_filters( 'wp_nav_menu_items', $items, $args );
 	/**
 	 * Filters the HTML list content for a specific navigation menu.
@@ -270,8 +273,7 @@ function wp_nav_menu( $args = array() ) {
 	 * @param stdClass $args  An object containing wp_nav_menu() arguments.
 	 */
 
-	echo 'items';
-	var_dump($items);
+
 
 	$items = apply_filters( "wp_nav_menu_{$menu->slug}_items", $items, $args );
 
