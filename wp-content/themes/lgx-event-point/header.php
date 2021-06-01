@@ -64,7 +64,7 @@
                                                 </div>
                                             </div>
                                             <div class="collapse navbar-collapse">
-                                                <?php lgx_event_point_main_menu(); ?>
+                                                <?php // lgx_event_point_main_menu(); ?>
                                             </div>
                                             <!--/.nav-collapse -->
                                         </div>
