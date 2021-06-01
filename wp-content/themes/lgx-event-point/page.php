@@ -16,7 +16,7 @@ $lgx_event_point_pag_sidbr = get_post_meta(get_the_ID(),'__lgx__page_sidebar',tr
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
+		<main id="main" class="site-main d">
 
 			<section>
 			    <div class="lgx-blog lgx-blog-list">
