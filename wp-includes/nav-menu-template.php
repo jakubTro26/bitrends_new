@@ -276,8 +276,7 @@ function wp_nav_menu( $args = array() ) {
 		return false;
 	}
 	
-	echo 'wrapid';
-	var_dump($wrap_id);
+	
 	echo 'wrap_class';
 	var_dump($wrap_class);
 	echo 'items';
