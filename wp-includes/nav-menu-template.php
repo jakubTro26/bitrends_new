@@ -231,7 +231,8 @@ function wp_nav_menu( $args = array() ) {
 	$items .= walk_nav_menu_tree( $sorted_menu_items, $args->depth, $args );
 	unset( $sorted_menu_items );
 
-
+	echo'args';
+	var_dump($sorted_menu_items);
 	
 
 	// Attributes.
@@ -275,8 +276,7 @@ function wp_nav_menu( $args = array() ) {
 	 * @param stdClass $args  An object containing wp_nav_menu() arguments.
 	 */
 
-	echo'args';
-	var_dump($args);
+	
 
 	$items = apply_filters( "wp_nav_menu_{$menu->slug}_items", $items, $args );
 
