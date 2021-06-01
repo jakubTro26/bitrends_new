@@ -1,9 +1,12 @@
 /**
- *	Copyright (C) 2015-20 CERBER TECH INC., https://wpcerber.com
+ *	Copyright (C) 2015-21 CERBER TECH INC., https://wpcerber.com
  */
 jQuery(document).ready(function ($) {
 
     window.crb_scan_id = 0;
+
+    const CERBER_LDE = 10;
+    const CERBER_UOP = 14;
 
     var crb_req_min_delay = 1000; // ms, throttling - making requests to the server not often than
 
@@ -20,6 +23,7 @@ jQuery(document).ready(function ($) {
     var crb_scan_requests = 0;
     var crb_server_errors = 0;
 
+    let crb_scanner = $("#crb-scanner");
     var crb_scan_display = $("#crb-scan-display");
     var crb_scan_controls = $('#crb-scan-controls');
     var crb_file_controls = $('#crb-file-controls');
@@ -38,11 +42,16 @@ jQuery(document).ready(function ($) {
 
     if (crb_admin_page === 'cerber-integrity'
         && (crb_admin_tab === '' || crb_admin_tab === 'scan_main')) {
+
+        /*if (crb_scanner.hasClass('crb-scanner-has-data')) {
+            crb_scan_details.append('<div class="uis_page_loader"></div>');
+        }*/
+
         cerber_scan_load_data();
     }
 
-    crb_scan_controls.find(':button,a').click(function (event) {
-        var operation = $(event.target).data('control');
+    crb_scan_controls.find(':button,a').on('click', function (event) {
+        let operation = $(event.target).data('control');
         switch (operation) {
             case 'start_scan':
                 cerber_scan_start($(event.target));
@@ -150,7 +159,7 @@ jQuery(document).ready(function ($) {
             }
             else {
                 cerber_scan_ended();
-                alert('Process has been aborted due to server error. Check the browser console for errors.');
+                alert('Process has been aborted due to a server error. Check your browser console for errors.');
             }
         });
     }
@@ -179,7 +188,7 @@ jQuery(document).ready(function ($) {
             alert(msg);
         }
         else if (!crb_user_stop) {
-            cerber_popup_show('The scan is finished', '<p style="text-align: center;">The scan is finished. Please review the results.</p>');
+            cerber_popup_show('The scan is finished', '<p style="text-align: center;">The scan is finished. Please review the results.</p><p style="text-align: center;"><a href="https://wpcerber.com/wordpress-integrity-checker/" target="_blank">Scanner documentation on wpcerber.com</a></p>');
         }
     }
 
@@ -290,7 +299,7 @@ jQuery(document).ready(function ($) {
                     name_classes += ' cursor-pointer';
                 }
 
-                if (issue_type_id < 10 ) {
+                if (issue_type_id < CERBER_LDE ) {
                     // Section -------------------------
 
                     if (issue_type_id === 4) {
@@ -371,16 +380,18 @@ jQuery(document).ready(function ($) {
             cerber_file_controls();
         }
 
+        /*
+        @since 8.7.1
         if (!no_scroll) {
             crb_scan_details.animate({scrollTop: crb_scan_details.prop("scrollHeight")}, 500);
-        }
+        }*/
     }
 
     function cerber_scan_parse(server_response) {
         crb_response = $.parseJSON(server_response);
         if (!crb_response) {
             cerber_scan_ended();
-            alert('Process has been aborted due to server error. Check the browser console for errors.');
+            alert('Process has been aborted due to a server error. Check your browser console for errors.');
             return false;
         }
 
@@ -402,12 +413,12 @@ jQuery(document).ready(function ($) {
 
         if (scanner_data.errors && scanner_data.errors.length) {
             scanner_data.errors.forEach(function (item, index) {
-                console.error('WP CERBER SCANNER ERROR: ' + item);
+                console.error('WP CERBER SCANNER: ' + item);
             });
         }
         if (crb_response.console_log && crb_response.console_log.length) {
             crb_response.console_log.forEach(function (item) {
-                console.log('WP CERBER: ' + item);
+                console.log('WP CERBER SCANNER: ' + item);
             });
         }
     }
@@ -420,6 +431,8 @@ jQuery(document).ready(function ($) {
             },
             function (server_response) {
                 cerber_scan_parse(server_response);
+                // Remove spinner
+                uis_loader_remove(crb_scan_details);
                 //scanner_data.step_issues = [];
                 cerber_scan_display(true);
             }
@@ -429,13 +442,13 @@ jQuery(document).ready(function ($) {
     }
 
     function cerber_get_issue_txt(index, issue) {
-        var attr = '';
-        var ret = crb_scan_msg_issues[issue[0]];
+        let attr = '';
+        let ret = crb_scan_msg_issues[issue[0]];
 
         if (issue.details.xdata && issue.details.xdata.length) {
             attr += ' data-idx="' + index + '" ';
         }
-        if (attr || (issue[0] > 14 && issue[0] < 50)) {
+        if (attr || (issue[0] === CERBER_LDE || (issue[0] > CERBER_UOP && issue[0] < 50))) {
             ret = '<a href="#" ' + attr + '>' + ret + '</a>';
         }
 
@@ -682,15 +695,15 @@ jQuery(document).ready(function ($) {
 
     function cerber_issue_popup(element) {
 
-        var info = [];
+        let info = [];
         //var section = $(element).closest('tr').prevAll('.crb-scan-section:first');
-        var section = cerber_get_section(element);
-        var section_type = section.data('setype');
-        var itype = cerber_get_itype(element);
+        let section = cerber_get_section(element);
+        let section_type = section.data('setype');
+        let itype = cerber_get_itype(element);
         crb_the_file = cerber_get_ifile(element);
 
-        if (itype === 15 || itype === 18) {
-            var section_name = section.data('section-name');
+        if (itype === CERBER_LDE || itype === 15 || itype === 18) {
+            let section_name = section.data('section-name');
             cerber_popup_show($(element).text(), cerber_get_issue_explain(itype, section_name), true);
             return;
         }
@@ -701,7 +714,7 @@ jQuery(document).ready(function ($) {
 
         // Some data after file inspection?
 
-        var d = cerber_xdata_info(section.prop('id'), $(element).data('idx'));
+        let d = cerber_xdata_info(section.prop('id'), $(element).data('idx'));
         if (d.length) {
             info.push(d);
         }
@@ -764,8 +777,19 @@ jQuery(document).ready(function ($) {
             subject = 'WordPress';
         }
         subject = '<b>' + subject + '</b>';
-        var ret = [];
+        let ret = [];
         switch (itype) {
+            case CERBER_LDE: // New way
+                let explainer = crb_txt_strings['explain_issue'][itype];
+                ret = explainer[0].map(item => {
+                    return item.replace('%s', subject);
+                });
+                if (typeof explainer[1] !== 'undefined') {
+                    ret = ret.concat(explainer[1].map(i => {
+                        return crb_txt_strings['explain'][i].replace('%s', subject);
+                    }));
+                }
+                break;
             case 15:
                 ret.push(crb_txt_strings['explain'][6]);
                 ret.push(crb_txt_strings['explain'][7].replace('%s', subject));
@@ -809,12 +833,12 @@ jQuery(document).ready(function ($) {
 
     // Uploader
 
-    var crb_upload_form = $('#crb-ref-upload-dialog').find('form');
-    var crb_upload_form_ul = $(crb_upload_form).find('ul');
+    let crb_upload_form = $('#crb-ref-upload-dialog').find('form');
+    let crb_upload_form_ul = $(crb_upload_form).find('ul');
 
     crb_upload_form.submit(function (event) {
 
-        var formData = new FormData($(this)[0]);
+        let formData = new FormData($(this)[0]);
         formData.append('action', 'cerber_ref_upload');
         formData.append('ajax_nonce', crb_ajax_nonce);
 
@@ -865,8 +889,8 @@ jQuery(document).ready(function ($) {
 
     function crb_ref_errors(response) {
         if (response.error) {
-            crb_upload_form_ul.append('<li>Error: ' + response.error + '</li>');
-            crb_upload_form_ul.append('<li style="color: red;">Process aborted</li>');
+            crb_upload_form_ul.append('<li style="color: #dd1320;">Process aborted</li>');
+            crb_upload_form_ul.append('<li style="color: #dd1320;">' + response.error + '</li>');
         }
     }
 
@@ -876,7 +900,7 @@ jQuery(document).ready(function ($) {
         crb_upload_form.trigger('reset');
     }
 
-    crb_upload_form.find('input').change(function () {
+    crb_upload_form.find('input').on('change', function () {
         crb_upload_form_ul.children().hide();
     });
 
@@ -888,7 +912,11 @@ jQuery(document).ready(function ($) {
             return;
         }
         //var file_name = $(this).data('file-name');
-        var file_name = $(this).closest('tr').data('file_name');
+        let file_name = $(this).closest('tr').data('file_name');
+
+        if (!file_name.length) {
+            return;
+        }
 
         var view_width = window.innerWidth * 0.8;
         var view_height = window.innerHeight * 0.8;

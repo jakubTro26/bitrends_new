@@ -153,14 +153,10 @@ if (DUP_Settings::Get('installer_name_mode') == DUP_Settings::INSTALLER_NAME_MOD
                     <th style="width: 70px;"><?php esc_html_e("Size", 'duplicator') ?></th>
                     <th><?php esc_html_e("Package Name", 'duplicator') ?></th>
                     <th class="inst-name">
-                        <a href='admin.php?page=duplicator-settings&tab=packageadmin.php?page=duplicator-settings&tab=package#installer-name-mode-option'>
-                            <?php
-                            esc_html_e("Installer Name", 'duplicator');
-                            ?>
-                        </a>
+                        <?php esc_html_e("Installer Name", 'duplicator'); ?>
                         <i class="fas fa-question-circle fa-sm" 
                            data-tooltip-title="<?php esc_html_e("Installer Name:", 'duplicator'); ?>"
-                           data-tooltip="<?php esc_html_e($packageExeNameModeMsg); ?>" >
+                           data-tooltip="<?php echo esc_attr($packageExeNameModeMsg); ?>" >
                         </i>
                     </th>
                     <th style="text-align:center; width: 200px;">
@@ -194,13 +190,12 @@ if (DUP_Settings::Get('installer_name_mode') == DUP_Settings::INSTALLER_NAME_MOD
                 $pack_name          = $Package->Name;
                 $pack_archive_size  = $Package->getArchiveSize();
                 $pack_perc          = $Package->Status;
-                $pack_storeurl      = $Package->StoreURL;
                 $pack_dbonly        = $Package->Archive->ExportOnlyDB;
                 $pack_build_mode    = ($Package->Archive->Format === 'ZIP') ? true : false;
 
                 //Links
                 $uniqueid    = $Package->NameHash;
-                $packagepath = $pack_storeurl.$Package->Archive->File;
+                $packagepath = DUP_Settings::getSsdirUrl().'/'.$Package->Archive->File;
 
                 $css_alt = ($packageTablerowCount % 2 != 0) ? '' : 'alternate';
 
@@ -239,15 +234,17 @@ if (DUP_Settings::Get('installer_name_mode') == DUP_Settings::INSTALLER_NAME_MOD
                             }
                             $installerName = $Package->getInstDownloadName();
                             ?>
-                            <i class="fas <?php echo $lockIcon; ?>"></i>
+                            <a href="admin.php?page=duplicator-settings&tab=packageadmin.php?page=duplicator-settings&tab=package#duplicator-installer-settings" title="<?php esc_html_e("Click to open settings page.", 'duplicator') ?>">
+                                <i class="fas <?php echo $lockIcon; ?>"></i>
+                            </a>
                             <input type="text" readonly="readonly" value="<?php echo esc_attr($installerName); ?>" title="<?php echo esc_attr($installerName); ?>" onfocus="jQuery(this).select();"/>
                             <span data-dup-copy-text="<?php echo $installerName; ?>" ><i class='far fa-copy' style='cursor: pointer'></i>
                         </td>
                         <td class="get-btns">
-                            <button id="<?php echo esc_attr("{$uniqueid}_installer.php"); ?>" class="button no-select" onclick="Duplicator.Pack.DownloadPackageFile(0, <?php echo absint($Package->ID); ?>); return false;">
+                            <button id="<?php echo esc_attr("{$uniqueid}_installer.php"); ?>" class="button no-select" onclick="Duplicator.Pack.DownloadInstaller(<?php echo DupLiteSnapJsonU::json_encode_esc_attr($Package->getInstallerDownloadInfo()); ?>); return false;">
                                 <i class="fa fa-bolt fa-sm"></i> <?php esc_html_e("Installer", 'duplicator') ?>
                             </button>
-                            <button id="<?php echo esc_attr("{$uniqueid}_archive.zip"); ?>" class="button no-select" onclick="Duplicator.Pack.DownloadFile('<?php echo esc_js($Package->Archive->File); ?>', '<?php echo esc_js($packagepath); ?>'); return false;">
+                            <button id="<?php echo esc_attr("{$uniqueid}_archive.zip"); ?>" class="button no-select" onclick="Duplicator.Pack.DownloadFile(<?php echo DupLiteSnapJsonU::json_encode_esc_attr($Package->getPackageFileDownloadInfo(DUP_PackageFileType::Archive)); ?>); return false;">
                                 <i class="far fa-file-archive"></i> <?php esc_html_e("Archive", 'duplicator') ?>
                             </button>
                             <button type="button" class="button no-select" title="<?php esc_attr_e("Package Details", 'duplicator') ?>" onclick="Duplicator.Pack.OpenPackageDetails(<?php echo "{$Package->ID}"; ?>);">
@@ -393,8 +390,7 @@ DIALOG: HELP DIALOG -->
                     arr[count++] = this.id;
                 }
             });
-            var list = arr.join(',');
-            return list;
+            return arr;
         }
 
         /*	Provides the correct confirmation items when deleting packages */
@@ -423,8 +419,13 @@ DIALOG: HELP DIALOG -->
             $.ajax({
                 type: "POST",
                 url: ajaxurl,
-                data: {action: 'duplicator_package_delete', duplicator_delid: list, nonce: '<?php echo esc_js(wp_create_nonce('duplicator_package_delete')); ?>'},
+                data: {
+                    action: 'duplicator_package_delete',
+                    package_ids: list,
+                    nonce: '<?php echo esc_js(wp_create_nonce('duplicator_package_delete')); ?>'
+                },
                 complete: function (data) {
+                    console.log(data);
                     Duplicator.ReloadWindow(data);
                 }
             });

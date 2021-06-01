@@ -4,9 +4,9 @@
  *
  */
 
-define( 'CRB_ADDON_PAGE', 'cerber-addons' );
-define( 'CRB_ADDON_SIGN', '_addon' );
-define( 'CRB_BOOT_ADDONS', 'boot_cerber_addons' );
+const CRB_ADDON_PAGE = 'cerber-addons';
+const CRB_ADDON_SIGN = '_addon';
+const CRB_BOOT_ADDONS = 'boot_cerber_addons';
 
 // Add-ons API -----------------------------------------------------------------
 
