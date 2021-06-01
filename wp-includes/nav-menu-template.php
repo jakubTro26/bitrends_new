@@ -264,7 +264,7 @@ function wp_nav_menu( $args = array() ) {
 	if ( empty( $items ) ) {
 		return false;
 	}
-	echo 'nav123' . $nav_menu;
+	//echo 'nav123' . $nav_menu;
 	$nav_menu .= sprintf( $args->items_wrap, esc_attr( $wrap_id ), esc_attr( $wrap_class ), $items );
 	unset( $items );
 
