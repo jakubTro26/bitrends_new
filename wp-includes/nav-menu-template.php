@@ -278,8 +278,7 @@ function wp_nav_menu( $args = array() ) {
 	
 	
 	
-	echo 'items';
-	var_dump($items);
+	
 	
 	$nav_menu .= sprintf( $args->items_wrap, esc_attr( $wrap_id ), esc_attr( $wrap_class ), $items );
 	unset( $items );
