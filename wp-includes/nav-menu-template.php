@@ -277,8 +277,7 @@ function wp_nav_menu( $args = array() ) {
 	}
 	
 	
-	echo 'wrap_class';
-	var_dump($wrap_class);
+	
 	echo 'items';
 	var_dump($items);
 	
