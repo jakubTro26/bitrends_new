@@ -88,8 +88,7 @@ function wp_nav_menu( $args = array() ) {
 	$args = apply_filters( 'wp_nav_menu_args', $args );
 	$args = (object) $args;
 
-echo 'args1';
-echo $args;
+
 
 	/**
 	 * Filters whether to short-circuit the wp_nav_menu() output.
