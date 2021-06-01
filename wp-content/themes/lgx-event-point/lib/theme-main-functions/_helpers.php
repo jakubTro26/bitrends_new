@@ -212,7 +212,7 @@ function lgx_event_point_main_menu(){
 if(is_user_logged_in()):
 	function lgx_event_point_menu() {
 		?>
-	    <ul class="nav navbar-nav lgx-nav">
+	    <ul class="nav navbar-nav lgx-nav f">
 	    	<li><a href="<?php echo esc_url(admin_url('nav-menus.php')); ?>"><?php esc_html_e( 'Add Menu', 'lgx-event-point' ); ?></a></li>
 		</ul>
 		<?php
