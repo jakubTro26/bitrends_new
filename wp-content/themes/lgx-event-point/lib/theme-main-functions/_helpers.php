@@ -195,15 +195,15 @@ function lgx_event_point_breadcrumb(){
  *  Menu Function
 =====================================================================*/
 function lgx_event_point_main_menu(){
-	// wp_nav_menu( array(
-	// 	'theme_location'    => 'mainmenu',
-	// 	'depth'             => 4,
-	// 	'container'         => false, 
-	// 	'menu_id'        	=> 'lgx-mn',
-	// 	'menu_class'        => 'nav navbar-nav lgx-nav v',
-	// 	'fallback_cb'       => 'lgx_event_point_menu',
-	// 	'walker'			=> new lgx_event_point_navwalker()
-	// ));
+	wp_nav_menu( array(
+		'theme_location'    => 'mainmenu',
+		'depth'             => 4,
+		'container'         => false, 
+		'menu_id'        	=> 'lgx-mn',
+		'menu_class'        => 'nav navbar-nav lgx-nav v',
+		'fallback_cb'       => 'lgx_event_point_menu',
+		'walker'			=> new lgx_event_point_navwalker()
+	));
 }
 
 /**=====================================================================
