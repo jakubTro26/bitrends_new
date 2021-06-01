@@ -218,6 +218,10 @@ function wp_nav_menu( $args = array() ) {
 	 * @param array    $sorted_menu_items The menu items, sorted by each menu item's menu order.
 	 * @param stdClass $args              An object containing wp_nav_menu() arguments.
 	 */
+
+
+
+
 	$sorted_menu_items = apply_filters( 'wp_nav_menu_objects', $sorted_menu_items, $args );
 
 
@@ -228,8 +232,7 @@ function wp_nav_menu( $args = array() ) {
 	unset( $sorted_menu_items );
 
 
-	echo 'items';
-	var_dump($items);
+	
 
 	// Attributes.
 	if ( ! empty( $args->menu_id ) ) {
@@ -272,7 +275,8 @@ function wp_nav_menu( $args = array() ) {
 	 * @param stdClass $args  An object containing wp_nav_menu() arguments.
 	 */
 
-
+	echo'args';
+	var_dump($args);
 
 	$items = apply_filters( "wp_nav_menu_{$menu->slug}_items", $items, $args );
 
