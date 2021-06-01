@@ -276,6 +276,7 @@ function wp_nav_menu( $args = array() ) {
 		return false;
 	}
 	echo 'navba';
+	echo $nav_menu;
 	
 	$nav_menu .= sprintf( $args->items_wrap, esc_attr( $wrap_id ), esc_attr( $wrap_class ), $items );
 	unset( $items );
