@@ -275,8 +275,7 @@ function wp_nav_menu( $args = array() ) {
 	if ( empty( $items ) ) {
 		return false;
 	}
-	echo 'navbaa';
-	var_dump($args->items_wrap);
+	
 	echo 'wrapid';
 	var_dump($wrap_id);
 	echo 'wrap_class';
