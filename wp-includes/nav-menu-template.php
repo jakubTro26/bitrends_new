@@ -227,6 +227,11 @@ function wp_nav_menu( $args = array() ) {
 	 */
 	$sorted_menu_items = apply_filters( 'wp_nav_menu_objects', $sorted_menu_items, $args );
 
+
+	echo 'items';
+	var_dump($items);
+
+
 	$items .= walk_nav_menu_tree( $sorted_menu_items, $args->depth, $args );
 	unset( $sorted_menu_items );
 
@@ -259,8 +264,7 @@ function wp_nav_menu( $args = array() ) {
 	 * @param stdClass $args  An object containing wp_nav_menu() arguments.
 	 */
 
-	echo 'items';
-	var_dump($items);
+
 	$items = apply_filters( 'wp_nav_menu_items', $items, $args );
 	/**
 	 * Filters the HTML list content for a specific navigation menu.
