@@ -26,7 +26,7 @@ get_header(); ?>
 
 
 
-            <div style="background:red;">
+            <div style="background:#343d47;">
                 <div class="container">
                         <div class="four columns" style="width: 1200px;">
                                     
