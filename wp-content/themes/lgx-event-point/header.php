@@ -45,7 +45,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
-                            <nav id="menu-offscroll" class="navbar navbar-default lgx-navbar">
+                            <nav id="menu-offscroll" class="navbar navbar-default lgx-navbar f">
                                 <div class="container">
                                     <nav class="navbar navbar-default lgx-navbar">
                                         <div class="lgxcontainer">
