@@ -12,6 +12,8 @@
 /**
  * We are installing.
  */
+
+ echo 'setup config';
 define( 'WP_INSTALLING', true );
 
 /**
