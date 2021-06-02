@@ -10,7 +10,7 @@ $lgx_event_point_opt = new LgxFrameworkOpt();
 $lgx_event_point_archbar = $lgx_event_point_opt->lgx_event_point_archiveSidebar();
 get_header(); ?>
  
-	<div id="primary" class="content-area">
+	<div id="primary" class="content-area b">
 		<main id="main" class="site-main">
 
 			<section>

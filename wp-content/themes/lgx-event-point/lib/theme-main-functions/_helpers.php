@@ -200,7 +200,7 @@ function lgx_event_point_main_menu(){
 		'depth'             => 4,
 		'container'         => false, 
 		'menu_id'        	=> 'lgx-mn',
-		'menu_class'        => 'nav navbar-nav lgx-nav',
+		'menu_class'        => 'nav navbar-nav lgx-nav v',
 		'fallback_cb'       => 'lgx_event_point_menu',
 		'walker'			=> new lgx_event_point_navwalker()
 	));
@@ -212,7 +212,7 @@ function lgx_event_point_main_menu(){
 if(is_user_logged_in()):
 	function lgx_event_point_menu() {
 		?>
-	    <ul class="nav navbar-nav lgx-nav">
+	    <ul class="nav navbar-nav lgx-nav f">
 	    	<li><a href="<?php echo esc_url(admin_url('nav-menus.php')); ?>"><?php esc_html_e( 'Add Menu', 'lgx-event-point' ); ?></a></li>
 		</ul>
 		<?php

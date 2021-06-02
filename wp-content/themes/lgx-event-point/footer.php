@@ -26,6 +26,8 @@ $lgx_event_point_ft_subscribe = $lgx_event_point_opt->lgx_event_point_footer_sub
 $lgx_event_point_ft_col = $lgx_event_point_opt->lgx_event_point_footer_col();
 ?>
 
+                
+
 	</div><!-- #content -->
 
 <footer>
@@ -42,6 +44,8 @@ $lgx_event_point_ft_col = $lgx_event_point_opt->lgx_event_point_footer_col();
         <div class="lgx-footer-bg">
             <div class="lgx-inner">
                 <div class="container">  
+
+               
                     <div class="lgx-subscriber-area">
                         <div class="lgx-testi-inner">
                             <div class="container">
@@ -101,7 +105,7 @@ $lgx_event_point_ft_col = $lgx_event_point_opt->lgx_event_point_footer_col();
                     </div>
                     <p class="lgx-copyright t">
                         <?php if(!empty($lgx_event_point_ft_copy)): ?>
-                            <?php echo 'Wszelkie prawa zastrzeżone 2018' ?>
+                            <?php echo 'Wszelkie prawa zastrzeżone 2021 ' ?>
                         <?php endif; ?>
                     </p>
                 </div>
