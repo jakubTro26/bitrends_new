@@ -17,7 +17,7 @@ $lgx_event_point_blogbar = $lgx_event_point_opt->lgx_event_point_blogSidebar();
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main c" >
+		<main id="main" class="site-main" >
 
 			<section>
 			    <div class="lgx-blog lgx-blog-list">

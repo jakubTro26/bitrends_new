@@ -40,8 +40,6 @@ class DUPX_ArchiveConfig
 	public $dbname;
 	public $dbuser;
 	public $dbpass;
-	public $dbcharset;
-	public $dbcollation;
 
 	//ADV OPTS	
 	public $wproot;

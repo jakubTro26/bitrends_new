@@ -177,6 +177,16 @@ class DUP_Util
     }
 
     /**
+     * Returns the wp-snapshot URL
+     *
+     * @return string The full URL of the duplicators snapshot storage directory
+     */
+    public static function snapshotURL()
+    {
+        return get_site_url(null, '', is_ssl() ? 'https' : 'http').'/'.DUPLICATOR_SSDIR_NAME.'/';
+    }
+
+    /**
      * Returns the last N lines of a file. Equivalent to tail command
      *
      * @param string $filepath The full path to the file to be tailed
@@ -410,25 +420,25 @@ class DUP_Util
      */
     public static function hasShellExec()
     {
-        $cmds = array('shell_exec', 'escapeshellarg', 'escapeshellcmd', 'extension_loaded');
+        $cmds = array('shell_exec', 'escapeshellarg', 'escapeshellcmd', 'extension_loaded', 'exec');
 
         //Function disabled at server level
         if (array_intersect($cmds, array_map('trim', explode(',', @ini_get('disable_functions')))))
-            return apply_filters('duplicator_is_shellzip_available', false);
+            return false;
 
         //Suhosin: http://www.hardened-php.net/suhosin/
         //Will cause PHP to silently fail
         if (extension_loaded('suhosin')) {
             $suhosin_ini = @ini_get("suhosin.executor.func.blacklist");
             if (array_intersect($cmds, array_map('trim', explode(',', $suhosin_ini))))
-                return apply_filters('duplicator_is_shellzip_available', false);
+                return false;
         }
 
         // Can we issue a simple echo command?
         if (!@shell_exec('echo duplicator'))
-            return apply_filters('duplicator_is_shellzip_available', false);
+            return false;
 
-        return apply_filters('duplicator_is_shellzip_available', true);
+        return true;
     }
 
     /**
@@ -552,14 +562,12 @@ class DUP_Util
     /**
      * Creates the snapshot directory if it doesn't already exist
      *
-     * @return bool
+     * @return null
      */
     public static function initSnapshotDirectory()
     {
-        $error = false;
-
         $path_wproot = duplicator_get_abs_path();
-        $path_ssdir  = DUP_Settings::getSsdirPath();
+        $path_ssdir  = DUP_Util::safePath(DUPLICATOR_SSDIR_PATH);
         $path_plugin = DUP_Util::safePath(DUPLICATOR_PLUGIN_PATH);
 
         if (!file_exists($path_ssdir)) {
@@ -571,21 +579,14 @@ class DUP_Util
             DupLiteSnapLibIOU::chmod($path_wproot, 'u+rwx');
 
             //snapshot directory
-            if (DupLiteSnapLibIOU::dirWriteCheckOrMkdir($path_ssdir, 'u+rwx,go+rx') == false) {
-                $error = true;
-            }
+            DupLiteSnapLibIOU::dirWriteCheckOrMkdir($path_ssdir, 'u+rwx,go+rx');
 
             // restore original root perms
             DupLiteSnapLibIOU::chmod($path_wproot, $old_root_perm);
-
-            if ($error) {
-                return false;
-            }
         }
 
         DupLiteSnapLibIOU::chmod($path_ssdir, 'u+rwx,go+rx');
-
-        DupLiteSnapLibIOU::dirWriteCheckOrMkdir(DUP_Settings::getSsdirTmpPath(), 'u+rwx');
+        DupLiteSnapLibIOU::dirWriteCheckOrMkdir($path_ssdir.'/tmp', 'u+rwx');
 
         //plugins dir/files
         DupLiteSnapLibIOU::dirWriteCheckOrMkdir($path_plugin.'files', 'u+rwx');
@@ -617,14 +618,9 @@ class DUP_Util
         $fileName = $path_ssdir.'/robots.txt';
         if (!file_exists($fileName)) {
             $robotfile = @fopen($fileName, 'w');
-            @fwrite($robotfile,
-                    "User-agent: * \n"
-                    ."Disallow: /".DUP_Settings::SSDIR_NAME_LEGACY."/\n"
-                    ."Disallow: /".DUP_Settings::SSDIR_NAME_NEW."/");
+            @fwrite($robotfile, "User-agent: * \nDisallow: /".DUPLICATOR_SSDIR_NAME.'/');
             @fclose($robotfile);
         }
-
-        return true;
     }
 
     /**

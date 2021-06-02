@@ -2,11 +2,9 @@
 defined('ABSPATH') || defined('DUPXABSPATH') || exit;
 
 DUP_Handler::init_error_handler();
-DUP_Util::hasCapability('export');
+DUP_Util::hasCapability('manage_options');
 
 global $wpdb;
-
-$dup_local_settings_path = dirname(__FILE__);
 
 //COMMON HEADER DISPLAY
 require_once(DUPLICATOR_PLUGIN_PATH . '/assets/js/javascript.php');
@@ -31,17 +29,17 @@ $current_tab = isset($_REQUEST['tab']) ? sanitize_text_field($_REQUEST['tab']) :
 
     <?php
     switch ($current_tab) {
-        case 'general': include("{$dup_local_settings_path}/general.php");
+        case 'general': include('general.php');
             break;
-		case 'package': include("{$dup_local_settings_path}/packages.php");
+		case 'package': include('packages.php');
             break;
-		case 'schedule': include("{$dup_local_settings_path}/schedule.php");
+		case 'schedule': include('schedule.php');
             break;
-        case 'storage': include("{$dup_local_settings_path}/storage.php");
+        case 'storage': include('storage.php');
             break;
-        case 'license': include("{$dup_local_settings_path}/license.php");
+        case 'license': include('license.php');
             break;
-        case 'about': include("{$dup_local_settings_path}/about-info.php");
+        case 'about': include('about-info.php');
             break;
     }
     ?>

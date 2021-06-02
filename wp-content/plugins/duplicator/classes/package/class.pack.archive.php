@@ -113,7 +113,7 @@ class DUP_Archive
 		if ($this->Package->BuildProgress === null) {
 			// Zip path
 			DUP_LOG::Trace("Completed Zip");
-			$storePath	 = DUP_Settings::getSsdirTmpPath()."/{$this->File}";
+			$storePath	 = "{$this->Package->StorePath}/{$this->File}";
 			$this->Size	 = @filesize($storePath);
 			$this->Package->setStatus(DUP_PackageStatus::ARCDONE);
 		} else if ($completed) {
@@ -123,7 +123,7 @@ class DUP_Archive
 				DUP_LOG::Trace("Error building DupArchive");
 				$this->Package->setStatus(DUP_PackageStatus::ERROR);
 			} else {
-				$filepath	 = DUP_Settings::getSsdirTmpPath()."/{$this->File}";
+				$filepath	 = DUP_Util::safePath("{$this->Package->StorePath}/{$this->File}");
 				$this->Size	 = @filesize($filepath);
 				$this->Package->setStatus(DUP_PackageStatus::ARCDONE);
 				DUP_LOG::Trace("Done building archive");
@@ -209,24 +209,23 @@ class DUP_Archive
 		return update_option(DUP_Package::OPT_ACTIVE, $package);
 	}
 
-    /**
-     *  Properly creates the directory filter list that is used for filtering directories
-     *
-     * @param string $dirs A semi-colon list of dir paths
-     *  /path1_/path/;/path1_/path2/;
-     *
-     * @returns string A cleaned up list of directory filters
-     * @return string
-     */
+	/**
+	 *  Properly creates the directory filter list that is used for filtering directories
+	 *
+	 *  @param string $dirs A semi-colon list of dir paths
+	 *  /path1_/path/;/path1_/path2/;
+	 *
+	 *  @returns string A cleaned up list of directory filters
+	 */
 	public function parseDirectoryFilter($dirs = "")
 	{
+		$dirs		 = str_replace(array("\n", "\t", "\r"), '', $dirs);
 		$filters	 = "";
 		$dir_array	 = array_unique(explode(";", $dirs));
 		$clean_array = array();
 		foreach ($dir_array as $val) {
-		    $val = DupLiteSnapLibIOU::safePathUntrailingslashit(DupLiteSnapLibUtil::sanitize_non_stamp_chars_newline_and_trim($val));
-			if (strlen($val) >= 2 && is_dir($val)) {
-				$clean_array[] = $val;
+			if (strlen($val) >= 2) {
+				$clean_array[] = DUP_Util::safePath(trim(rtrim($val, "/\\")));
 			}
 		}
 
@@ -238,24 +237,23 @@ class DUP_Archive
 		return $filters;
 	}
 
-    /**
-     *  Properly creates the file filter list that is used for filtering files
-     *
-     * @param string $files A semi-colon list of file paths
-     *  /path1_/path/file1.ext;/path1_/path2/file2.ext;
-     *
-     * @returns string A cleaned up list of file filters
-     * @return string
-     */
+	/**
+	 *  Properly creates the file filter list that is used for filtering files
+	 *
+	 *  @param string $dirs A semi-colon list of dir paths
+	 *  /path1_/path/file1.ext;/path1_/path2/file2.ext;
+	 *
+	 *  @returns string A cleaned up list of file filters
+	 */
 	public function parseFileFilter($files = "")
 	{
+		$files		 = str_replace(array("\n", "\t", "\r"), '', $files);
 		$filters	 = "";
 		$file_array	 = array_unique(explode(";", $files));
 		$clean_array = array();
 		foreach ($file_array as $val) {
-            $val = DupLiteSnapLibIOU::safePathUntrailingslashit(DupLiteSnapLibUtil::sanitize_non_stamp_chars_newline_and_trim($val));
-            if (strlen($val) >= 2 && file_exists($val)) {
-				$clean_array[] = $val;
+			if (strlen($val) >= 2) {
+				$clean_array[] = DUP_Util::safePath(trim(rtrim($val, "/\\")));
 			}
 		}
 
@@ -310,8 +308,7 @@ class DUP_Archive
 		$wp_content_upload				 = "{$wp_content}/{$upload_dir}";
 		$this->FilterInfo->Dirs->Core	 = array(
 			//WP-ROOT
-			DUP_Settings::getSsdirPathLegacy(),
-            DUP_Settings::getSsdirPathWpCont(),
+			$wp_root.'/wp-snapshots',
             $wp_root.'/.opcache',
 			//WP-CONTENT
 			$wp_content.'/backups-dup-pro',
@@ -764,11 +761,6 @@ class DUP_Archive
 		}
 		return $this->wpContentDirNormalizePath;
 	}
-
-	public function getUrl()
-    {
-        return DUP_Settings::getSsdirUrl()."/".$this->File;
-    }
 
 	public function getLocalDirPath($dir, $basePath = '')
 	{

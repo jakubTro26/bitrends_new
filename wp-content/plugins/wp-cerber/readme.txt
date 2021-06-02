@@ -1,24 +1,29 @@
-=== WP Cerber Security, Anti-spam & Malware Scan ===
+=== Cerber Security, Antispam & Malware Scan ===
 Contributors: gioni
-Tags: security, malware scanner, antispam, firewall, limit login attempts, custom login url, login, recaptcha, captcha, activity, log, logging, access list
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SQ5EC8WQP654Q&source=url
+Tags: security, malware scanner, antispam, firewall, limit login attempts, custom login url, login, recaptcha, captcha, activity, log, logging, whitelist, blacklist, access list
 Requires at least: 4.9
 Requires PHP: 5.6
-Tested up to: 5.7
-Stable tag: 8.8.5
+Tested up to: 5.4
+Stable tag: 8.6.3
 License: GPLv2
 
 Protection against hacker attacks and bots. Malware scanner & integrity checker. User activity log. Antispam reCAPTCHA. Limit login attempts.
 
 == Description ==
 
-Defends WordPress against hacker attacks, spam, trojans, and malware. Mitigates brute-force attacks by limiting the number of login attempts through the login form, XML-RPC / REST API requests, or using auth cookies. Tracks user and bad actors activity with flexible email, mobile and desktop notifications. Stops spammers by using a specialized anti-spam engine. Uses Google reCAPTCHA to protect registration, contact, and comments forms. Restricts access with IP Access Lists. Monitors the website integrity with an advanced malware scanner and integrity checker. Reinforces the security of WordPress with a set of flexible security rules and sophisticated security algorithms.
+Defends WordPress against hacker attacks, spam, trojans and malware.
+Mitigates brute force attacks by limiting the number of login attempts through the login form, XML-RPC / REST API requests or using auth cookies.
+Tracks user and bad actors activity with flexible email, mobile and desktop notifications.
+Stops spam by using a specialized Cerber's anti-spam engine and Google reCAPTCHA to protect registration, contact and comments forms.
+Advanced malware scanner, integrity checker and file monitor.
+Hardening WordPress with a set of flexible security rules and sophisticated security algorithms.
+Restricts access with Black and White IP Access Lists.
 
 **Features you will love**
 
 * Limit login attempts when logging in by IP address or entire subnet.
 * Monitors logins made by login forms, XML-RPC requests or auth cookies.
-* Permit or restrict access by [IP Access Lists](https://wpcerber.com/using-ip-access-lists-to-protect-wordpress/) with a single IP, IP range or subnet.
+* Permit or restrict access by [White IP Access list and Black IP Access List](https://wpcerber.com/using-ip-access-lists-to-protect-wordpress/) with a single IP, IP range or subnet.
 * Create **Custom login URL** ([rename wp-login.php](https://wpcerber.com/how-to-rename-wp-login-php/)).
 * Cerber anti-spam engine for protecting contact and registration forms.
 * Automatically detects and moves spam comments to trash or denies them completely.
@@ -86,8 +91,6 @@ Cerber Security Scanner allows you to configure a schedule for automated recurri
 
 Two-Factor Authentication (2FA) provides an additional layer of security requiring a second factor of identification beyond just a username and password. When 2FA is enabled on a website, it requires a user to provide an additional verification code when signing into the website. This verification code is generated automatically and sent to the user by email.
 
-[Read more about Two-Factor Authentication](https://wpcerber.com/wordpress/2fa/).
-
 = Log, filter out and export activities =
 
 WP Cerber tracks time, IP addresses and usernames for successful and failed login attempts, logins, logouts, password changes, blocked IP and actions taken by itself. You can export them to a CSV file.
@@ -100,7 +103,9 @@ Massive botnet brute force attack? That's no longer a problem. **Citadel mode** 
 
 = Cerber anti-spam engine =
 
-Anti-spam and anti-bot protection for contact, registration, comments and other forms. WP Cerber anti-spam and bot detection engine now protects all forms on a website. No reCAPTCHA is needed. It’s compatible with virtually any form you have. Tested with Gravity Forms, Caldera Forms, HappyForms, Contact Form 7, Ninja Forms, Formidable Forms, Fast Secure Contact Form, Contact Form by WPForms.
+Anti-spam and anti-bot protection for contact, registration, comments and other forms.
+WP Cerber anti-spam and bot detection engine now protects all forms on a website. No reCAPTCHA is needed.
+It’s compatible with virtually any form you have. Tested with Caldera Forms, Gravity Forms, Contact Form 7, Ninja Forms, Formidable Forms, Fast Secure Contact Form, Contact Form by WPForms.
 
 = Anti-spam protection: invisible reCAPTCHA for WooCommerce =
 
@@ -154,9 +159,9 @@ How to get full control of personal data to be in compliance with data privacy l
 
 Thanks to [POEditor.com](https://poeditor.com) for helping to translate this project.
 
-**Compatibility is not verified**
-
-There are some plugins that were not checked to be compatible: Login LockDown, Login Security Solution, BruteProtect, Ajax Login & Register, Lockdown WP Admin, Loginizer, Sucuri, Wordfence, BulletProof Security, SiteGuard WP Plugin, iThemes Security, All In One WP Security & Firewall, Brute Force Login Protection
+There are some semi-similar security plugins you can check out: Login LockDown, Login Security Solution,
+BruteProtect, Ajax Login & Register, Lockdown WP Admin, Loginizer,
+BulletProof Security, SiteGuard WP Plugin, All In One WP Security & Firewall, Brute Force Login Protection
 
 **Another reliable plugins from the trusted author**
 
@@ -174,7 +179,10 @@ Installing the WP Cerber Security plugin is the same as other WordPress plugins.
 
 1. Install the plugin through Plugins > Add New > Upload or unzip plugin package into wp-content/plugins/.
 2. Activate the WP Cerber through the Plugins > Installed Plugins menu in the WordPress admin dashboard.
-3. Read carefully: [Getting Started Guide](https://wpcerber.com/getting-started/)
+3. The plugin is now active and has started protecting your WordPress with default settings.
+4. Make sure, that you've got a notification letter to your site admin email.
+5. It's advised to enable Standard mode for the "Load security engine" setting.
+5. Read carefully: [Getting Started Guide](https://wpcerber.com/getting-started/)
 
 **Important notes**
 
@@ -193,6 +201,7 @@ The following steps are optional but they allow you to reinforce the protection 
 5. Specify the list of prohibited usernames (logins) that legit users will never use. They will not be permitted to log in or register.
 6. Configure mobile and browser notifications via Pushbullet.
 7. Obtain keys and enable invisible reCAPTCHA for password reset and registration forms (WooCommerce supported too).
+
 
 == Frequently Asked Questions ==
 
@@ -268,6 +277,10 @@ With Fail2Ban you can protect site on the OS level with iptables firewall. See d
 
 No, you don't. It is optional.
 
+= Is WP Cerber Security compatible with other security plugins like WordFence, iThemes Security, Sucuri, NinjaFirewall, All In One WP Security & Firewall, BulletProof Security? =
+
+The plugin has been tested with WordFence and no issues have been noticed. Other plugins also should be compatible.
+
 = Can I use this plugin on the WP Engine hosting? =
 
 Yes! WP Cerber Security is not on the list of disallowed plugins.
@@ -294,9 +307,9 @@ There is a special version of the plugin called **WP Cerber Reset**. This versio
 To get access to your dashboard you need to copy the WP Cerber Reset folder to the plugins folder. Follow these simple steps.
 
 1. Download the wp-cerber-reset.zip archive to your computer using this link: [https://wpcerber.com/downloads/wp-cerber-reset.zip](https://wpcerber.com/downloads/wp-cerber-reset.zip)
-2. Unpack the wp-cerber folder from the archive.
-3. Upload the wp-cerber folder to the **plugins** folder of your WordPress using any FTP client or a file manager in your hosting control panel. If you see a question about overwriting files, click Yes.
-4. Log in to your website as usual. Now WP Cerber is disabled completely.
+2. Unpack wp-cerber folder from the archive.
+3. Upload the wp-cerber folder to the **plugins** folder of your site using any FTP client or a file manager from your hosting control panel. If you see a question about overwriting files, click Yes.
+4. Log in to your site as usually. Now WP Cerber is disabled completely.
 5. Reinstall the WP Cerber plugin again. You need to do that, because **WP Cerber Reset** cannot work as a normal plugin.
 
 == Screenshots ==
@@ -316,108 +329,6 @@ To get access to your dashboard you need to copy the WP Cerber Reset folder to t
 
 
 == Changelog ==
-
-= 8.8.5 =
-* New: Quick user activity analytics (user insights) with filtering links on the Activity and Live Traffic log pages. Select a user to see how it works.
-* New: Quick IP address activity and analytics (IP insights) with filtering links on the Activity and Live Traffic log pages. Select an IP address to see how it works.
-Improved: The selected user profile is displayed when filtering log entries by the user login or using the username search on the Activity log page.
-Improved: The IP address details and analytics are displayed when filtering log entries by the IP address or using the IP address search on the Activity log page.
-Improved: Implemented AJAX rendering of the plugin admin pages for faster loading and more convenient navigation through WP Cerber’s admin pages
-Improved: To load the Users admin page faster, the user table columns generated by WP Cerber are now loaded via AJAX.
-Improved: Highlighting the selected filtering link in the navigation bar on the Activity and Live Traffic log pages.
-Improved: You will not see false DB errors on the Diagnostic page anymore.
-Fixed bug: When scanning, you can come across the software error "Process has been aborted due to server error. Check the browser console for errors." and "Too few arguments" error in the server error log.
-
-= 8.8.3 =
-New: Mimicking the default WordPress user authentication through the wp-login.php to detect slow brute-force attacks.
-New: Prevent guessing valid usernames and user emails by disabling WordPress hints in the login error message when attempting to log in with non-existing usernames and emails.
-New: Prevent guessing valid usernames and user emails by disabling WordPress hints in the password reset error message when attempting to reset passwords for non-existing accounts.
-New: Prevent username discovery via oEmbed and user XML sitemaps.
-New: User and malicious activity are displayed separately in two different areas on WP Cerber’s main dashboard page.
-New: More convenient navigation through the WP Cerber admin pages by having the admin menu at the top.
-New: A new quick link "Login issues" to view all login issues such as failed logins, denied attempts, attempts to reset passwords, and so forth.
-Improved: Reduced the number of false positives when the malware scanner inspecting directives with external IP addresses in .htaccess files.
-Improved: Better 2FA emails: the wording of the verification email has been updated and can be translated. The email subject includes the site name.
-Improved: The size of the database tables used by the integrity checker and malware scanner has been reduced.
-Improved: Implemented a strictly secure way of utilizing the unserialize() PHP function known for being used to deliver and run malicious code.
-Improved: Implemented a backup way of running WP Cerber maintenance tasks if WordPress scheduled tasks are not configured properly.
-Fixed bug: 2FA PINs are not displayed on the edit user admin pages in the WordPress dashboard.
-Fixed bug: The "API request authorization failed" event was logged as "Login failed".
-
-= 8.8 =
-* New: [You get control over the WordPress application passwords and the ability to monitor related events in the log with email and mobile notifications.](https://wpcerber.com/wordpress-application-passwords-how-to/)
-* New: A custom comment URL feature improves the efficiency of spam protection of the WordPress comment form. Available in the professional version of WP Cerber.
-* Improved: Handling user authentication and authorization by WP Cerber’s access control mechanism has been significantly improved and optimized to allow using external user authentication via third-part solutions and connectors.
-* Improved: You can now specify a user message to be displayed if [the configured limit to the number of concurrent user sessions](https://wpcerber.com/limiting-concurrent-user-sessions-in-wordpress/) has been reached and an attempt to log in is denied.
-* Improved: Traffic log settings and features: "Log all REST API requests", "Log all XML-RPC requests", "Save response headers", and "Save response cookies".
-* Improved: For better compatibility with different web server configurations, [the anti-spam query whitelist](https://wpcerber.com/antispam-exception-for-specific-http-request/) now ignores trailing slashes if a list entry or a requested URI has no GET parameters.
-* Improved: Processing of extended and invalid UTF-8 characters in the Traffic Inspector log has been improved.
-* Improved: Displaying of invalid UTF-8 characters (invalid byte sequences) in the WP Cerber’s logs throughout the admin interface has been improved.
-* Improved: WP Cerber's dashboard code is updated and now fully jQuery 3 compatible.
-* Fixed: A bug that prevented activating [the Cerber.Hub master mode](https://wpcerber.com/manage-multiple-websites/) on PHP 8.
-* Fixed: A fatal PHP error occurs while saving some WP Cerber settings when using [Cerber.Hub](https://wpcerber.com/manage-multiple-websites/) on a remote website with “Standard mode” enabled.
-* Fixed: A bug that generated warning messages in the web server error log: Use of undefined constant LOGGED_IN_COOKIE – assumed ‘LOGGED_IN_COOKIE’
-* Fixed: A bug that blocked theme preview if the anti-spam engine is enabled for all forms on the website.
-* [Read more](https://wpcerber.com/wp-cerber-security-8-8/)
-
-= 8.7 =
-* New: [Limiting the number of allowed concurrent user sessions.](https://wpcerber.com/limiting-concurrent-user-sessions-in-wordpress/) Depending on settings, WP Cerber will either block new logins or terminate the oldest ones.
-* New: Enforcing [two-factor authentication (2FA)](https://wpcerber.com/two-factor-authentication-for-wordpress/) if the number of concurrent user sessions is greater than the specified threshold.
-* Improved: [The integrity checker and malware scanner](https://wpcerber.com/wordpress-security-scanner/) now more effectively handle and log I/O errors that might occur during a scan.
-* Improved: [The Traffic Inspector firewall](https://wpcerber.com/traffic-inspector-in-a-nutshell/) now processes files uploaded via nested, grouped, and obfuscated form fields in a more effective way.
-* Improved: WP Cerber got necessary code improvements, and now it is fully compatible with PHP 8.
-* Improved: [The default list of allowed REST API namespaces](https://wpcerber.com/restrict-access-to-wordpress-rest-api/) now includes "wp-site-health".
-* Improved: Downloadable files generated by WP Cerber are generated with appropriate HTTP Content-Type headers now.
-* Fixed: Misalignment of Cerber’s table footer labels on the "Users" admin page.
-* Fixed: If the diagnostic log contains invalid Unicode (UTF-8) codes, it is not displayed on the Diagnostic log tab.
-* [Read more](https://wpcerber.com/wp-cerber-security-8-7/)
-
-= 8.6.8 =
-* New: [A shortcode to display WP Cerber’s cookies. You can display a list of cookies set by WP Cerber on any page.](https://wpcerber.com/browser-cookies-set-by-wp-cerber/)
-* New: [Deferred rendering of the custom login page. This new feature can help you if you need to solve plugin compatibility issues.](https://wpcerber.com/user-switching-with-wp-cerber/)
-* Improved: The style of the scanner email reports has been improved.
-* Fixed: A bug with displaying the status icon of an IP address on the Activity and Live Traffic admin pages.
-* Fixed: If the name of a commercial plugin contains a special HTML symbol like ampersand, it cannot be uploaded to verify the integrity of the plugin.
-* [Read more](https://wpcerber.com/wp-cerber-security-8-6-8/)
-
-= 8.6.7 =
-* New: In the professional version of WP Cerber, you can now permit user registrations for IP addresses in the [White IP Access List only](https://wpcerber.com/using-ip-access-lists-to-protect-wordpress/).
-* New: All URLs in the logs are displayed in a shortened form without the website’s domain.  There is no much value having see known things.
-* New: A new label "IP Whitelisted" with green borders has been introduced. It is displayed in a log row on the Live Traffic if the IP address was in the White IP Access List, but the appropriate setting "Use White IP Access List" was not enabled at the moment when the event was logged.
-* New: If you now hover the mouse over a red square icon in the Activity or Live Traffic log, you see the reason why the IP address in the row is currently locked out.
-* New: If you now hover the mouse over a green or black square Access List icon in the Activity or Live Traffic log, you see the comment you’ve previously specified for that Access List entry.
-* Improved: All non-REGEX entries [in the list of prohibited usernames (logins)](https://wpcerber.com/using-list-of-prohibited-logins-to-catch-stupid-bots/) are case-insensitive now. This applies to standard Latin-based (ASCII) WordPress usernames only.
-* Improved: The name of a group in the Group column on [Cerber.Hub’s](https://wpcerber.com/manage-multiple-websites/) website list is a link that takes you to the list of websites in the group.
-* Improved: The launch time of the daily maintenance tasks is now set to the night-time at 02:20. If you need them to get rescheduled, you can manually delete the “cerber_daily” cron task via a plugin or deactivate/activate WP Cerber.
-* Fixed: Configured [REST API restrictions](https://wpcerber.com/restrict-access-to-wordpress-rest-api/) have no effect if a WordPress is installed not in the root folder of a website (there is a path in the site URL). Affected versions: 8.6.1 and newer.
-* Fixed: A bug in the logging subsystem: depending on server configuration, submitted form fields are not saved into the DB (if it is enabled in the logging settings).
-* Fixed: A bug with Cerber’s admin CSS styles that were added in the previous version and hid the top pagination links on the "All posts" and "All posts" admin pages.
-* [Read more](https://wpcerber.com/wp-cerber-security-8-6-7/)
-
-= 8.6.6 =
-* New: On the user sessions page, you can now search sessions by a user name, email, and the IP address from which a user has logged in.
-* New: You can specify locations (URL Paths) to exclude requests from logging. They can be either exact matches or regular expressions (REGEX).
-* New: You can exclude requests from logging based on the value of the User-Agent (UA) header.
-* New: A new, minimal logging mode. When it is set, only HTTP requests related to known activities are logged.
-* Improved: The layout of the Live Traffic log has been improved: now all events that are logged during a particular request are shown as an event list sorted in reverse order.
-* Improved: The user sessions page has been optimized for performance and compatibility and now works blazingly fast.
-* Improved: If your website is behind a proxy, IP addresses of user sessions now are detected more precisely.
-* Improved: When you configure the request whitelist in the Traffic Inspector settings, you can now specify rules with or without trailing slash.
-* Improved: A new version of [Cloudflare add-on for WP Cerber](https://wpcerber.com/cloudflare-add-on-wp-cerber/) is available: the performance of the add-on has been optimized.
-* [Read more](https://wpcerber.com/wp-cerber-security-8-6-6/)
-
-= 8.6.5 =
-* New: File system analytics. It's generated based on the results of the last full integrity scan.
-* New: Logging user deletions. The user’s display name and roles are temporarily stored until all log entries related to the user are deleted.
-* New: Faster export with a new date format for CSV log export.
-* New: Ability to disable adding the website administrator's IP address to the White IP Access List upon WP Cerber activation.
-* Improved: Handling the creation of new users by WooCommerce and membership plugins.
-* Improved: Handling user registrations with prohibited emails.
-* Improved: Handling secure Cerber‘s cookies on websites with SSL encryption enabled.
-* Improved: The performance of the integrity checker and malware scanner on huge websites with a large number of files.
-* Fixed: Loading the default plugin settings has no effect. Now it’s fixed and moved from the admin sidebar to the Tools admin page.
-* [Read more](https://wpcerber.com/wp-cerber-security-8-6-5/)
-
 = 8.6.3 =
 * New: Ability to load IP access list's entries in the CSV format (bulk load).
 * Update: A new malware scanner setting allows you to permit the scanner to change permissions of folders and files when required.

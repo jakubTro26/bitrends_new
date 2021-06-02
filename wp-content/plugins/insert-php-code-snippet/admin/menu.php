@@ -2,10 +2,22 @@
 if ( ! defined( 'ABSPATH' ) )
 	 exit;
 
-	 if(isset($_GET['page']) && $_GET['page']=='insert-php-code-snippet-manage' ){
-	     ob_start();
-	 }
-	 
+if(isset($_GET['action']) && $_GET['action']=='snippet-status' ){
+	ob_start();
+}
+	
+if(isset($_GET['action']) && $_GET['action']=='snippet-add' ){
+	ob_start();
+}	
+
+if(isset($_GET['action']) && $_GET['action']=='snippet-delete' ){
+	ob_start();
+}
+
+if(isset($_GET['action']) && $_GET['action']=='snippet-edit' ){
+		ob_start();
+}
+
 if(isset($_GET['page']) && $_GET['page']=='insert-php-code-snippet-suggest-features' ){
 	ob_start();
 }

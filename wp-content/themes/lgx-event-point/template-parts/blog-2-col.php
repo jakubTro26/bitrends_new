@@ -15,7 +15,7 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main h">
+		<main id="main" class="site-main">
 
 			<section>
 			    <div class="lgx-blog lgx-blog-list">

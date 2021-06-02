@@ -117,11 +117,7 @@ jQuery(document).ready(function($)
 	Duplicator.Tools.runScanValidator = function()
 	{
 		tb_remove();
-		var data = {
-		    action : 'DUP_CTRL_Tools_runScanValidator',
-            nonce: '<?php echo esc_js($ajax_nonce); ?>',
-            recursive_scan: 1
-		};
+		var data = {action : 'DUP_CTRL_Tools_runScanValidator', nonce: '<?php echo esc_js($ajax_nonce); ?>', 'scan-recursive': true};
 
 		$('#hb-result').html('<?php esc_html_e("Scanning Environment... This may take a few minutes.", "duplicator"); ?>');
 		$('#scan-run-btn').html('<i class="fas fa-circle-notch fa-spin fa-fw"></i> Running Please Wait...');

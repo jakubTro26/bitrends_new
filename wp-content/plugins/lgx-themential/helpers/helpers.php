@@ -49,28 +49,18 @@ if ( ! function_exists( 'lgx_spilt_heading' ) ) {
         $heading_first = '';
         $heading_last  = '';
         $heading_str   = trim( $heading );
-      
         if ( isset( $heading_str ) && ! empty( $heading_str ) ) {
             $heading_arr   = explode( " ", $heading_str );
-            var_dump($heading_arr);
             $heading_first = isset( $heading_arr[0] ) ? $heading_arr[0] : '';
             unset( $heading_arr[0] );
             $heading_last = implode( $heading_arr );
-
-           
         }
 
         $output =  $heading_first . ' <span>' . $heading_last . '</span>';
 
-        
-
         if($type == 'left') {
-           
-            $output = '<span>'. $heading_first . '</span>' . $heading_last ;
+            $output = '<span>'. $heading_first . ' </span>' . $heading_last ;
         }
-
-       
-
         return $output;
     }
 }

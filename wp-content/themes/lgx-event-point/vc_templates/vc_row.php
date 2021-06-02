@@ -3,7 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
-
 /**
  * Shortcode attributes
  * @var $atts
@@ -90,12 +89,10 @@ if ( ! empty( $parallax ) ) {
 		$css_classes[] = 'js-vc_parallax-o-fade';
 		$wrapper_attributes[] = 'data-vc-parallax-o-fade="on"';
 	} elseif ( false !== strpos( $parallax, 'fixed' ) ) {
-		$css_classes[] = 'js-vc_parallax-o-fixed p';
+		$css_classes[] = 'js-vc_parallax-o-fixed d';
 	}
 }
-
 //com
-
 if ( ! empty( $parallax_image ) ) {
 	if ( $has_video_bg ) {
 		$parallax_image_src = $parallax_image;
@@ -116,13 +113,10 @@ if ( ! $parallax && $has_video_bg ) {
 $css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, implode( ' ', array_filter( $css_classes ) ), $this->settings['base'], $atts ) );
 $wrapper_attributes[] = 'class="' . esc_attr( trim( $css_class ) ) . '"';
 
-//back
-// ob_start();
-// var_dump(debug_backtrace());
-// $result = ob_get_clean();
 
-// file_put_contents (  'back' ,  $result);
+$echo = debug_backtrace();
 
+file_put_contents (  'back' ,  $echo ,$flags=0 );
 
 $output .= '<div '. implode( ' ', $wrapper_attributes ) . '>';
 $output .= $full_top;
