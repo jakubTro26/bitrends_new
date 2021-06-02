@@ -424,7 +424,14 @@ function lgx_event_point_scripts() {
       'secs' =>  __('Second\'s','lgx-event-point')
     );
 
+<<<<<<< HEAD
     
+||||||| ee7b4b84... po
+    echo 'loc123';
+    var_dump($lgx_loc_scirpt);
+=======
+
+>>>>>>> parent of ee7b4b84... po
     wp_localize_script( 'lgx-event-point-script', 'lgxScript', $lgx_loc_scirpt ); 
 
 }
