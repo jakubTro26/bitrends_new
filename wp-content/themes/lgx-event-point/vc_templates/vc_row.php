@@ -89,7 +89,7 @@ if ( ! empty( $parallax ) ) {
 		$css_classes[] = 'js-vc_parallax-o-fade';
 		$wrapper_attributes[] = 'data-vc-parallax-o-fade="on"';
 	} elseif ( false !== strpos( $parallax, 'fixed' ) ) {
-		$css_classes[] = 'js-vc_parallax-o-fixed e';
+		$css_classes[] = 'js-vc_parallax-o-fixed d';
 	}
 }
 //com
