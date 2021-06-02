@@ -1,11 +1,11 @@
 <?php
 defined('ABSPATH') || defined('DUPXABSPATH') || exit;
 
-if (!class_exists('DupLiteWPConfigTransformer')):
+if (!class_exists('WPConfigTransformer')):
 /**
  * Transforms a wp-config.php file.
  */
-class DupLiteWPConfigTransformer {
+class WPConfigTransformer {
 
     const REPLACE_TEMP_STIRNG = '_1_2_RePlAcE_3_4_TeMp_5_6_StRiNg_7_8_';
 

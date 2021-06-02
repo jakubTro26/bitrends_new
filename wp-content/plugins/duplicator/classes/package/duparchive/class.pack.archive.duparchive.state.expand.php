@@ -40,10 +40,13 @@ class DUP_DupArchive_Expand_State extends DupArchiveExpandState
         } else {
             $this->archiveHeader      = null;
         }
-
-        if ($data->failuresString) {
+        
+        if($data->failuresString)
+        {
             $this->failures = DUP_JSON::decode($data->failuresString);
-        } else {
+        }
+        else
+        {
             $this->failures = array();
         }
 
@@ -84,7 +87,7 @@ class DUP_DupArchive_Expand_State extends DupArchiveExpandState
             $data->archiveHeaderString      = null;
         }
 
-        $data->failuresString = DupLiteSnapJsonU::wp_json_encode($this->failures);
+        $data->failuresString = DupLiteSnapJsonU::wp_json_encode($this->failures, JSON_FORCE_OBJECT);
 
         // Object members auto skipped
         DUP_Util::objectCopy($this, $data);

@@ -49,7 +49,7 @@ class DUP_Log
             throw new Exception("A name value is required to open a file log.");
         }
         self::Close();
-        if ((self::$logFileHandle = @fopen(DUP_Settings::getSsdirPath()."/{$nameHash}.log", "a+")) === false) {
+        if ((self::$logFileHandle = @fopen(DUPLICATOR_SSDIR_PATH."/{$nameHash}.log", "a+")) === false) {
             self::$logFileHandle = null;
             return false;
         } else {
@@ -130,12 +130,10 @@ class DUP_Log
 		$backup_path = DUP_Log::getBackupTraceFilepath();
 
 		if (file_exists($file_path)) {
+			$filesize = filesize($file_path);
 
-            $filesize = is_file($file_path) ? @filesize($file_path) : 0;
-
-            //Its possible mulitple trace log files exist due to size
-			if (is_file($backup_path)) {
-				$filesize += @filesize($backup_path);
+			if (file_exists($backup_path)) {
+				$filesize += filesize($backup_path);
 			}
 
 			$message = sprintf('%1$s', DUP_Util::byteSize($filesize));
@@ -211,16 +209,11 @@ class DUP_Log
 		return hash('md5', $auth_key);
 	}
 
-    /**
-	 * Gets the current file size of the old trace file "1"
-	 *
-	 * @return string   Returns a human readable file size of the active trace file
-	 */
 	public static function GetBackupTraceFilepath()
 	{
 		$default_key		 = self::getDefaultKey();
 		$backup_log_filename = "dup_$default_key.log1";
-		$backup_path		 = DUP_Settings::getSsdirPath()."/".$backup_log_filename;
+		$backup_path		 = DUPLICATOR_SSDIR_PATH."/".$backup_log_filename;
 		return $backup_path;
 	}
 
@@ -233,7 +226,7 @@ class DUP_Log
 	{
 		$default_key	 = self::getDefaultKey();
 		$log_filename	 = "dup_$default_key.log";
-		$file_path		 = DUP_Settings::getSsdirPath()."/".$log_filename;
+		$file_path		 = DUPLICATOR_SSDIR_PATH."/".$log_filename;
 		return $file_path;
 	}
 
@@ -252,14 +245,12 @@ class DUP_Log
 		@unlink($backup_path);
 	}
 
-    /**
-     *  Called when an error is detected and no further processing should occur
-     * @param string $msg The message to log
-     * @param string $detail Additional details to help resolve the issue if possible
-     * @param int $behavior
-     * @throws Exception
-     */
-	public static function error($msg, $detail = '', $behavior = Dup_ErrorBehavior::Quit)
+	/**
+	 *  Called when an error is detected and no further processing should occur
+	 *  @param string $msg The message to log
+	 *  @param string $details Additional details to help resolve the issue if possible
+	 */
+	public static function Error($msg, $detail, $behavior = Dup_ErrorBehavior::Quit)
 	{
 
 		error_log($msg.' DETAIL:'.$detail);
@@ -281,7 +272,7 @@ class DUP_Log
             
 			case Dup_ErrorBehavior::ThrowException:
 				DUP_LOG::trace("throwing exception");
-                throw new Exception($msg);
+				throw new Exception("DUPLICATOR ERROR: Please see the 'Package Log' file link below.");
 				break;
 
 			case Dup_ErrorBehavior::Quit:
@@ -350,7 +341,7 @@ class DUP_Handler
      *
      * @var bool
      */
-    private static $initialized = false;
+    private static $inizialized = false;
 
     /**
      *
@@ -389,10 +380,10 @@ class DUP_Handler
      */
     public static function init_error_handler()
     {
-        if (!self::$initialized) {
+        if (!self::$inizialized) {
             @set_error_handler(array(__CLASS__, 'error'));
             @register_shutdown_function(array(__CLASS__, 'shutdown'));
-            self::$initialized = true;
+            self::$inizialized = true;
         }
     }
 
@@ -411,7 +402,7 @@ class DUP_Handler
             case self::MODE_OFF:
                 if ($errno == E_ERROR) {
                     $log_message = self::getMessage($errno, $errstr, $errfile, $errline);
-                    DUP_Log::error($log_message);
+                    DUP_Log::Error($log_message);
                 }
                 break;
             case self::MODE_VAR:
@@ -422,7 +413,7 @@ class DUP_Handler
                 switch ($errno) {
                     case E_ERROR :
                         $log_message = self::getMessage($errno, $errstr, $errfile, $errline);
-                        DUP_Log::error($log_message);
+                        DUP_Log::Error($log_message);
                         break;
                     case E_NOTICE :
                     case E_WARNING :
