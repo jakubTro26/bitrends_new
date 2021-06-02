@@ -291,8 +291,6 @@ if(!class_exists('Wpacc'))
 		public static function display_custom_css(){
 	    	$display_css = get_query_var('display_custom_css');
 	    	if ($display_css == 'css'){
-
-					
 					include_once (plugin_dir_path( __FILE__ ) . '/css/custom-css.php');
 	      	exit;
 	    	}
