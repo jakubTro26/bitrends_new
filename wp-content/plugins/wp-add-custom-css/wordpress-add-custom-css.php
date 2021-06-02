@@ -1,4 +1,5 @@
 <?php
+
 /*
 Plugin Name: WP Add Custom CSS
 Plugin URI: http://www.danieledesantis.net
@@ -335,8 +336,8 @@ if(!class_exists('Wpacc'))
 }
 
 if(class_exists('Wpacc')) {
-	//add_action('template_redirect', array('Wpacc', 'display_custom_css'));
-	//$wpacc = new Wpacc();
+	add_action('template_redirect', array('Wpacc', 'display_custom_css'));
+	$wpacc = new Wpacc();
 }
 
 if(isset($wpacc)) {
@@ -347,4 +348,5 @@ if(isset($wpacc)) {
     }
     add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'wpacc_settings_link');
 }
+
 ?>
