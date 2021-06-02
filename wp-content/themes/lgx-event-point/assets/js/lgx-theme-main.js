@@ -4,8 +4,6 @@
 
 
     $(document).ready(function() {
-        console.log(lgxScript);
-        console.log(lgxScript);
             // gallery slider
         $(".slider-container").ikSlider({
           speed: 500

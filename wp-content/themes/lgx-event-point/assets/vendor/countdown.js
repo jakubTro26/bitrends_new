@@ -76,7 +76,17 @@
   function strftime(offsetObject) {
     return function(format) {
       var directives = format.match(/%(-|!)?[A-Z]{1}(:[^;]+;)?/gi);
+<<<<<<< HEAD
      
+||||||| merged common ancestors
+<<<<<<< HEAD
+     
+||||||| 545d28f6... po
+      console.log(directives);
+=======
+>>>>>>> parent of 545d28f6... po
+=======
+>>>>>>> 297d606f636e683dc731040bed292472150f3690
       if(directives) {
         for(var i = 0, len = directives.length; i < len; ++i) {
           var directive   = directives[i]
