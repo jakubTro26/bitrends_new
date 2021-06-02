@@ -98,7 +98,7 @@
             $('#lgx-countdown').countdown(dataTime, function(event) {
                 var $this = $(this).html(event.strftime(''
                         /*+ '<span class="lgx-weecks">%w <i> weeks </i></span> '*/
-                    + '<span class="lgx-days">%D <i> dni</i></span> '
+                    + '<span class="lgx-days">%D <i> dnii</i></span> '
                     + '<span class="lgx-hr">%H <i> godz </i></span> '
                     + '<span class="lgx-min">%M <i> min </i></span> '
                     + '<span class="lgx-sec">%S <i> sek </i></span>'
