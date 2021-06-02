@@ -338,18 +338,8 @@ if(isset($wpacc)) {
 =======
 <?php
 
-/*
-Plugin Name: WP Add Custom CSS
-Plugin URI: http://www.danieledesantis.net
-Description: Add custom css to the whole website and to specific posts, pages and custom post types.
-Version: 1.1.5
-Author: Daniele De Santis
-Author URI: http://www.danieledesantis.net
-Text Domain: wp-add-custom-css
-Domain Path: /languages/
-License: GPL2
-*/
 
+<<<<<<< HEAD
 /*
 Copyright 2014-2019  Daniele De Santis  (email : hello@danieledesantis.net)
 
@@ -689,6 +679,8 @@ if(isset($wpacc)) {
 <<<<<<< HEAD
 >>>>>>> 8f4eac0a6a17ce3c98de0182f69a860cc2b3e3e6
 =======
+=======
+>>>>>>> dfabdeae88ed4eab9184475597ec804933803aa9
 
 >>>>>>> cebcda99605eae0f059f245ddbdeb8af29cc9441
 ?>
