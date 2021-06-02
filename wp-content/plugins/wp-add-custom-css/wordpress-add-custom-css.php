@@ -335,8 +335,8 @@ if(!class_exists('Wpacc'))
 }
 
 if(class_exists('Wpacc')) {
-	add_action('template_redirect', array('Wpacc', 'display_custom_css'));
-	$wpacc = new Wpacc();
+	//add_action('template_redirect', array('Wpacc', 'display_custom_css'));
+	//$wpacc = new Wpacc();
 }
 
 if(isset($wpacc)) {
