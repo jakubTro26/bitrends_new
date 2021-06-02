@@ -102,9 +102,8 @@ ul li#wp-admin-bar-crb_site_switch {
     word-wrap: normal !important;
 }
 
-#crb-nexus-sites .tablenav select,
-#crb-nexus-sites .tablenav input[type="text"] {
-    width: auto;
+#crb-nexus-sites .bulkactions {
+    margin-right: 2em;
 }
 
 #crb-nexus-sites .bulkactions select option:last-child {

@@ -45,7 +45,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
-                            <nav id="menu-offscroll" class="navbar navbar-default lgx-navbar f">
+                            <nav id="menu-offscroll" class="navbar navbar-default lgx-navbar">
                                 <div class="container">
                                     <nav class="navbar navbar-default lgx-navbar">
                                         <div class="lgxcontainer">
@@ -57,14 +57,14 @@
                                                     <span class="icon-bar"></span>
                                                     <span class="icon-bar"></span>
                                                 </button>
-                                                <div class="lgx-logo kds">
+                                                <div class="lgx-logo d">
                                                     <a href="<?php echo esc_url(home_url('/')); ?>" class="lgx-scroll">
                                                         <img src="<?php echo esc_url($lgx_event_point_logo); ?>" alt="Logo"/>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="collapse navbar-collapse">
-                                                <?php  lgx_event_point_main_menu(); ?>
+                                                <?php lgx_event_point_main_menu(); ?>
                                             </div>
                                             <!--/.nav-collapse -->
                                         </div>

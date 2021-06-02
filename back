@@ -19,7 +19,7 @@ array(18) {
     ["class"]=>
     string(17) "WPBakeryShortCode"
     ["object"]=>
-    object(WPBakeryShortCode_Vc_Row)#5393 (11) {
+    object(WPBakeryShortCode_Vc_Row)#5392 (11) {
       ["predefined_atts":protected]=>
       array(1) {
         ["el_class"]=>
@@ -557,7 +557,7 @@ array(18) {
     ["class"]=>
     string(24) "WPBakeryShortCode_Vc_Row"
     ["object"]=>
-    object(WPBakeryShortCode_Vc_Row)#5393 (11) {
+    object(WPBakeryShortCode_Vc_Row)#5392 (11) {
       ["predefined_atts":protected]=>
       array(1) {
         ["el_class"]=>
@@ -1057,7 +1057,7 @@ array(18) {
     ["class"]=>
     string(17) "WPBakeryShortCode"
     ["object"]=>
-    object(WPBakeryShortCode_Vc_Row)#5393 (11) {
+    object(WPBakeryShortCode_Vc_Row)#5392 (11) {
       ["predefined_atts":protected]=>
       array(1) {
         ["el_class"]=>
@@ -1696,12 +1696,12 @@ array(18) {
       array(5) {
         [8]=>
         array(2) {
-          ["000000004aca5e27000000002c9f1912run_shortcode"]=>
+          ["000000005dfa4b690000000024e764b6run_shortcode"]=>
           array(2) {
             ["function"]=>
             array(2) {
               [0]=>
-              object(WP_Embed)#560 (7) {
+              object(WP_Embed)#561 (7) {
                 ["handlers"]=>
                 array(2) {
                   [10]=>
@@ -1752,12 +1752,12 @@ array(18) {
             ["accepted_args"]=>
             int(1)
           }
-          ["000000004aca5e27000000002c9f1912autoembed"]=>
+          ["000000005dfa4b690000000024e764b6autoembed"]=>
           array(2) {
             ["function"]=>
             array(2) {
               [0]=>
-              object(WP_Embed)#560 (7) {
+              object(WP_Embed)#561 (7) {
                 ["handlers"]=>
                 array(2) {
                   [10]=>
@@ -1880,19 +1880,19 @@ array(18) {
             ["accepted_args"]=>
             int(1)
           }
-          ["000000004aca481e000000002c9f1912fixPContent"]=>
+          ["000000005dfa5d500000000024e764b6fixPContent"]=>
           array(2) {
             ["function"]=>
             array(2) {
               [0]=>
-              object(Vc_Base)#5129 (7) {
+              object(Vc_Base)#5128 (7) {
                 ["shortcode_edit_form":protected]=>
-                object(Vc_Shortcode_Edit_Form)#5132 (1) {
+                object(Vc_Shortcode_Edit_Form)#5131 (1) {
                   ["initialized":protected]=>
                   NULL
                 }
                 ["templates_panel_editor":protected]=>
-                object(Vc_Templates_Panel_Editor)#5130 (3) {
+                object(Vc_Templates_Panel_Editor)#5129 (3) {
                   ["option_name":protected]=>
                   string(16) "wpb_js_templates"
                   ["default_templates":protected]=>
@@ -1901,7 +1901,7 @@ array(18) {
                   bool(false)
                 }
                 ["preset_panel_editor":protected]=>
-                object(Vc_Preset_Panel_Editor)#5133 (1) {
+                object(Vc_Preset_Panel_Editor)#5132 (1) {
                   ["initialized":protected]=>
                   bool(false)
                 }
@@ -1913,7 +1913,7 @@ array(18) {
                 array(0) {
                 }
                 ["shared_templates"]=>
-                object(Vc_Shared_Templates)#5131 (2) {
+                object(Vc_Shared_Templates)#5130 (2) {
                   ["initialized":protected]=>
                   bool(false)
                   ["download_link_url":protected]=>

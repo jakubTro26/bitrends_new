@@ -3,7 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
-
 /**
  * Shortcode attributes
  * @var $atts
@@ -90,12 +89,10 @@ if ( ! empty( $parallax ) ) {
 		$css_classes[] = 'js-vc_parallax-o-fade';
 		$wrapper_attributes[] = 'data-vc-parallax-o-fade="on"';
 	} elseif ( false !== strpos( $parallax, 'fixed' ) ) {
-		$css_classes[] = 'js-vc_parallax-o-fixed p';
+		$css_classes[] = 'js-vc_parallax-o-fixed d';
 	}
 }
-
 //com
-
 if ( ! empty( $parallax_image ) ) {
 	if ( $has_video_bg ) {
 		$parallax_image_src = $parallax_image;

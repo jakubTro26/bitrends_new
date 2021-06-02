@@ -10,7 +10,7 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main f"> 
+		<main id="main" class="site-main"> 
 			<section>
 			    <div class="lgx-blog lgx-blog-single">
 			        <div class="lgx-inner">

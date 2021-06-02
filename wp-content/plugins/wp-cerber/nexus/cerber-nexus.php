@@ -1,7 +1,7 @@
 <?php
 /*
-	Copyright (C) 2015-21 CERBER TECH INC., https://cerber.tech
-	Copyright (C) 2015-21 Markov Cregory, https://wpcerber.com
+	Copyright (C) 2015-20 CERBER TECH INC., https://cerber.tech
+	Copyright (C) 2015-20 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -38,7 +38,6 @@ function nexus_init() {
 	if ( nexus_is_slave() ) {
 		require_once( dirname( __FILE__ ) . '/cerber-nexus-slave.php' );
 		if ( nexus_is_valid_request() ) {
-			cerber_load_wp_constants();
 			nexus_slave_process();
 		}
 	}
@@ -47,7 +46,6 @@ function nexus_init() {
 	     || cerber_is_wp_cron() ) {
 		if ( nexus_is_master() ) {
 			require_once( dirname( __FILE__ ) . '/cerber-nexus-master.php' );
-			nexus_upgrade_db();
 		}
 	}
 
@@ -231,14 +229,14 @@ function nexus_enable_role() {
 	$data = array();
 	switch ( $role ) {
 		case 'slave':
-			$all_ascii = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
-			$num = rand( 20, 50 );
+			$all_ascii       = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+			$num             = rand( 20, 50 );
 			$data['nx_pass'] = substr( str_shuffle( $all_ascii ), 0, $num );
 			$data['nx_echo'] = substr( str_shuffle( $all_ascii ), 0, $num );
 
-			$num = rand( 8, 10 );
+			$num             = rand( 8, 10 );
 			$data['x_field'] = substr( str_shuffle( 'abcdefghijklmnopqrstuvwxyz' ), 0, $num );
-			$data['x_num'] = rand( 1, $num - 2 ); // see loop in nexus_get_fields()
+			$data['x_num']   = rand( 1, $num - 2 ); // see loop in nexus_get_fields()
 			break;
 		case 'master':
 			require_once( dirname( __FILE__ ) . '/cerber-nexus-master.php' );
@@ -348,7 +346,7 @@ function nexus_get_context() {
 	}
 
 	if ( ! function_exists( 'wp_get_current_user' ) // No information about a user is available
-	     || ! cerber_user_can_manage() ) {
+	     || ! current_user_can( 'manage_options' ) ) {
 		return false;
 	}
 
