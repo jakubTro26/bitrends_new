@@ -12,7 +12,7 @@ $lgx_event_point_srchbar = $lgx_event_point_opt->lgx_event_point_searchSidebar()
 get_header(); ?>
  
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main" >
+		<main id="main" class="site-main e" >
 
 			<section>
 			    <div class="lgx-blog lgx-blog-list">

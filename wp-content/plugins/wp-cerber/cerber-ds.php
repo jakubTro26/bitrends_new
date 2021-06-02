@@ -1,7 +1,7 @@
 <?php
 /*
-	Copyright (C) 2015-20 CERBER TECH INC., https://cerber.tech
-	Copyright (C) 2015-20 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-21 CERBER TECH INC., https://cerber.tech
+	Copyright (C) 2015-21 Markov Cregory, https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -31,6 +31,7 @@ final class CRB_DS {
 	private static $user_blocked = false;
 	private static $user_fields = array( 'user_login' => 'lgn', 'user_pass' => 'pwd', 'user_email' => 'eml' );
 	private static $opt_cache = array();
+	private static $no_user_meta_shadow = ''; // Do not return user meta from shadow when meta is updating.
 	//private static $user_metas = array( 'capabilities' );
 
 	static function enable_shadowing( $type ) {
@@ -58,7 +59,7 @@ final class CRB_DS {
 					$data[5] = CRB_USHD_KEY; // If users' tables are shared among mutiple websites, define it in the wp-config.php on all websites before (!) activation shadowing
 				}
 				else {
-					$data[5] = substr( str_shuffle( 'abcdefghijklmnopqrstuvwxyz' ), 0, rand( 14, 16 ) );
+					$data[5] = crb_random_string( 14, 16, false, false );
 				}
 
 				$conf[ $type ] = $data;
@@ -66,7 +67,7 @@ final class CRB_DS {
 
 				self::update_user_shadow( get_current_user_id(), null, null, self::is_meta_preserve() );
 
-				cerber_bg_task_add( array( 'func' => '_crb_ds_background', 'exec_until' => 'done' ) );
+				cerber_bg_task_add( '_crb_ds_background', array( 'exec_until' => 'done' ) );
 
 				break;
 
@@ -74,8 +75,8 @@ final class CRB_DS {
 			case 3: // Settings
 
 				$data[1] = time(); // Should be set after all shadows has created
-				$data[5] = substr( str_shuffle( 'abcdefghijklmnopqrstuvwxyz' ), 0, rand( 10, 12 ) );
-				$data[6] = substr( str_shuffle( '0123456789abcdefghijklmnopqrstuvwxyz' ), 0, rand( 8, 14 ) );
+				$data[5] = crb_random_string( 10, 12, false, false );
+				$data[6] = crb_random_string( 8, 14, true, false );
 
 				$conf[ $type ] = $data;
 				self::save_config( $conf );
@@ -217,7 +218,8 @@ final class CRB_DS {
 			return array();
 		}
 
-		$ret = @unserialize( self::decode( $um ) );
+		$val = self::decode( $um );
+		$ret = crb_unserialize( $val );
 
 		if ( ! $ret || ! is_array( $ret ) ) {
 			$ret = array();
@@ -332,29 +334,31 @@ final class CRB_DS {
 			return;
 		}
 
-		$update_shadow = false;
-
-		if ( crb_get_settings( 'ds_4acc_acl' ) && crb_acl_is_white() ) {
-			$update_shadow = true;
-		}
+		//$update_permitted = self::acc_update_permitted_by_ip();
+		$update_permitted = ( crb_get_settings( 'ds_4acc_acl' ) && crb_acl_is_white() );
 
 		switch ( $mode ) {
 			case 'new':
 				self::$update_user = null;
-				if ( ! $update_shadow ) {
-					$update_shadow = self::acc_new( $user_id );
+				if ( ! $update_permitted ) {
+					$update_permitted = self::acc_new( $user_id );
 				}
-				if ( $update_shadow ) {
+				if ( $update_permitted ) {
 					self::update_user_shadow( $user_id );
 				}
 				break;
+
 			case 'update':
 				self::$update_user = $user_id;
-				self::acc_update( $user_id, $data );
-				// Must be deferred till user's data is saved to DB
-				add_action( 'profile_update', function ( $user_id ) {
-					CRB_DS::update_helper( $user_id );
-				} );
+				if ( ! $update_permitted ) {
+					$update_permitted = self::acc_update( $user_id, $data );
+				}
+				if ( $update_permitted ) {
+					// Must be deferred till user's data is saved to DB
+					add_action( 'profile_update', function ( $user_id ) {
+						CRB_DS::update_helper( $user_id );
+					} );
+				}
 				break;
 		}
 
@@ -370,14 +374,14 @@ final class CRB_DS {
 	}
 
 	/**
-	 * Protect DB from an authorized user creation
+	 * Protect DB from an unauthorized user creation
 	 *
 	 * @param $user_id
 	 *
 	 * @return bool true if this operation is permitted
 	 */
 	private static function acc_new( $user_id ) {
-		global $cerber_status;
+		global $cerber_act_status;
 
 		$set                = crb_get_settings();
 		self::$user_blocked = false;
@@ -385,13 +389,13 @@ final class CRB_DS {
 		// Due to lack of a hook in the wp_insert_user() we are forced to check permissions and use wp_delete_user() after the user was created
 		if ( ! is_user_logged_in() ) {
 			if ( ! crb_user_has_role_strict( $set['ds_regs_roles'], $user_id ) ) {
-				$cerber_status      = 32;
+				$cerber_act_status      = 32;
 				self::$user_blocked = true;
 			}
 		}
 		else {
 			if ( ! cerber_user_has_role( $set['ds_add_acc'] ) ) {
-				$cerber_status      = 33;
+				$cerber_act_status      = 33;
 				self::$user_blocked = true;
 			}
 		}
@@ -421,11 +425,11 @@ final class CRB_DS {
 	 * @return bool true if this operation is permitted
 	 */
 	private static function acc_update( $user_id, $data ) {
-		global $cerber_status, $wpdb;
+		global $cerber_act_status, $wpdb;
 
 		$cid = get_current_user_id();
 
-		self::$acc_owner = ( $user_id == $cid ) ? true : false;
+		self::$acc_owner = ( $user_id == $cid );
 		self::$user_blocked = false;
 
 		if ( ! cerber_user_has_role( crb_get_settings( 'ds_edit_acc' ) ) ) {
@@ -455,7 +459,7 @@ final class CRB_DS {
 				// Protect the user's row in the users table
 				add_filter( 'query', 'crb_empty_query', PHP_INT_MAX );
 				add_filter( 'pre_get_col_charset', 'crb_return_wp_error', PHP_INT_MAX );
-				$cerber_status = ( ! $cid ) ? 34 : 33;
+				$cerber_act_status = ( ! $cid ) ? 34 : 33;
 				cerber_log( 73 );
 			}
 
@@ -485,24 +489,24 @@ final class CRB_DS {
 	}
 
 	/**
-	 * Protect/process users metas and roles from being updated
+	 * Restricts updating if not allowed.
+	 * Updates shadow of user meta (and roles) if allowed.
 	 *
-	 * @param $var
 	 * @param $user_id
 	 * @param $meta_key
 	 * @param $meta_value
-	 * @param $prev_value
 	 *
-	 * @return bool|null
+	 * @return bool
 	 */
-	static function protect_user_meta( $var, $user_id, $meta_key, $meta_value, $prev_value ) {
-		global $cerber_status;
+	static function update_user_meta( $user_id, $meta_key, $meta_value ) {
+		global $cerber_act_status;
 
 		// A user is not permitted to be created or updated?
 		if ( self::$user_blocked ) {
 			if ( self::is_meta_protected( $meta_key ) ) { // User roles are here
-				$cerber_status = ( ! is_user_logged_in() ) ? 34 : 33;
+				$cerber_act_status = ( ! is_user_logged_in() ) ? 34 : 33;
 				cerber_log( 76 );
+				self::$no_user_meta_shadow = '';
 
 				return false;
 			}
@@ -511,21 +515,23 @@ final class CRB_DS {
 		if ( true === self::is_meta_preserve( $meta_key ) ) {
 			$ok = false;
 
-			//if ( ( self::$update_user == $user_id )
 			if ( cerber_user_has_role( crb_get_settings( 'ds_edit_acc' ) ) ) {
 				$ok = true;
 			}
 			// Makes sense for user's role meta ONLY
-			elseif ( is_array( $meta_value ) && ! array_diff_key( $meta_value, array_flip( crb_get_settings( 'ds_regs_roles' ) ) ) ) {
+			elseif ( is_array( $meta_value )
+			         && ( $reg_roles = (array) crb_get_settings( 'ds_regs_roles' ) )
+			         && ! array_diff_key( $meta_value, array_flip( $reg_roles ) ) ) {
 				$ok = true;
 			}
 
 			if ( $ok ) {
+				self::$no_user_meta_shadow = $meta_key;
 				self::update_user_shadow( $user_id, null, array( $meta_key => $meta_value ) );
 			}
 		}
 
-		return $var;
+		return true;
 	}
 
 	private static function is_meta_preserve( $meta_key = null ) {
@@ -559,10 +565,10 @@ final class CRB_DS {
 		return false;
 	}
 
-	static function get_user_meta( $user_id, $meta_key, $single ) {
+	static function get_shadow_user_meta( $user_id, $meta_key, $single ) {
 
-		if ( ( $conf = self::get_config( 1 ) )
-		     && $conf[5] == $meta_key ) {
+		if ( self::$no_user_meta_shadow == $meta_key
+		     || ( ( $conf = self::get_config( 1 ) ) && $conf[5] == $meta_key ) ) {
 			return false; // Skip use shadow meta (infinite loop protection)
 		}
 
@@ -584,7 +590,7 @@ final class CRB_DS {
 	 * @return mixed The old value if update is not permitted
 	 */
 	static function setting_processor( &$value, $option, &$old_value ) {
-		global $cerber_status;
+		global $cerber_act_status;
 
 		if ( empty( self::get_protected_settings()[3][ $option ] ) ) {
 			return $value;
@@ -611,7 +617,7 @@ final class CRB_DS {
 		$roles = crb_get_settings( 'ds_4opts_roles' );
 
 		if ( ! $roles || ! cerber_user_has_role( $roles ) ) {
-			$cerber_status = ( is_user_logged_in() ) ? 33 : 34;
+			$cerber_act_status = ( is_user_logged_in() ) ? 33 : 34;
 			cerber_log( 75 );
 
 			return $old_value;
@@ -623,7 +629,7 @@ final class CRB_DS {
 	}
 
 	static function role_processor( &$value, $option, &$old_value ) {
-		global $cerber_status;
+		global $cerber_act_status;
 
 		if ( ! is_array( $value )
 		     || ( substr( $option, - 11 ) != '_user_roles' ) ) {
@@ -634,11 +640,11 @@ final class CRB_DS {
 			return $value;
 		}
 
-		$cerber_status = 0;
+		$cerber_act_status = 0;
 
 		if ( ! self::role_update_permitted( $value, $old_value ) ) {
-			if ( ! $cerber_status ) {
-				$cerber_status = ( is_user_logged_in() ) ? 33 : 34;
+			if ( ! $cerber_act_status ) {
+				$cerber_act_status = ( is_user_logged_in() ) ? 33 : 34;
 			}
 			cerber_log( 74 );
 
@@ -693,6 +699,14 @@ final class CRB_DS {
 
 		return true;
 	}
+
+	/*static function acc_update_permitted_by_ip() {
+		if ( crb_get_settings( 'ds_4acc_acl' ) && crb_acl_is_white() ) {
+			return true;
+		}
+
+		return false;
+	}*/
 
 	/**
 	 * Install hooks for retrieving data of protected settings
@@ -823,19 +837,19 @@ final class CRB_DS {
 	}
 
 	static function get_status() {
-		$ret = '';
+		$ret = array();
 
 		if ( crb_get_settings( 'ds_4acc' ) ) {
 			self::get_type_status( 1, $msg );
-			$ret .= 'Enabled for user accounts. ' . $msg;
+			$ret [] = 'Enabled for user accounts. ' . $msg;
 		}
 		if ( crb_get_settings( 'ds_4roles' ) ) {
 			self::get_type_status( 2, $msg );
-			$ret .= '<p>Enabled for user roles. ' . $msg;
+			$ret [] = 'Enabled for user roles. ' . $msg;
 		}
 		if ( crb_get_settings( 'ds_4opts' ) ) {
 			self::get_type_status( 3, $msg );
-			$ret .= '<p>Enabled for site settings. ' . $msg;
+			$ret [] = 'Enabled for site settings. ' . $msg;
 		}
 
 		return $ret;
@@ -881,17 +895,23 @@ if ( crb_get_settings( 'ds_4acc' ) && CRB_DS::is_ready( 1 ) ) {
 		return $data;
 	}, PHP_INT_MAX, 3 );
 
-	add_filter( 'update_user_metadata', function ( $var, $object_id, $meta_key, $meta_value, $prev_value ) {
+	add_filter( 'update_user_metadata', function ( $var, $object_id, $meta_key, $meta_value ) {
 		// apply_filters( "update_{$meta_type}_metadata", null, $object_id, $meta_key, $meta_value, $prev_value );
 
-		return CRB_DS::protect_user_meta( $var, $object_id, $meta_key, $meta_value, $prev_value );
+		$allowed = CRB_DS::update_user_meta( $object_id, $meta_key, $meta_value );
 
-	}, PHP_INT_MAX, 5 );
+		if ( ! $allowed ) {
+			return true;
+		}
+
+		return $var;
+
+	}, PHP_INT_MAX, 4 );
 
 	add_filter( 'get_user_metadata', function ( $var, $object_id, $meta_key, $single ) {
 		//$check = apply_filters( "get_{$meta_type}_metadata", null, $object_id, $meta_key, $single );
 
-		if ( $meta = CRB_DS::get_user_meta( $object_id, $meta_key, $single ) ) {
+		if ( $meta = CRB_DS::get_shadow_user_meta( $object_id, $meta_key, $single ) ) {
 			return $meta;
 		}
 
