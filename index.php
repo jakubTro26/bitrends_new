@@ -13,6 +13,6 @@
  */
 define( 'WP_USE_THEMES', true );
 
-echo  'testd';
+echo  'testdf';
 /** Loads the WordPress Environment and Template */
 require __DIR__ . '/wp-blog-header.php';
