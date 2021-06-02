@@ -337,6 +337,7 @@ if(isset($wpacc)) {
 }
 =======
 <?php
+
 /*
 Plugin Name: WP Add Custom CSS
 Plugin URI: http://www.danieledesantis.net
@@ -673,8 +674,8 @@ if(!class_exists('Wpacc'))
 }
 
 if(class_exists('Wpacc')) {
-	//add_action('template_redirect', array('Wpacc', 'display_custom_css'));
-	//$wpacc = new Wpacc();
+	add_action('template_redirect', array('Wpacc', 'display_custom_css'));
+	$wpacc = new Wpacc();
 }
 
 if(isset($wpacc)) {
@@ -685,5 +686,9 @@ if(isset($wpacc)) {
     }
     add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'wpacc_settings_link');
 }
+<<<<<<< HEAD
 >>>>>>> 8f4eac0a6a17ce3c98de0182f69a860cc2b3e3e6
+=======
+
+>>>>>>> cebcda99605eae0f059f245ddbdeb8af29cc9441
 ?>
