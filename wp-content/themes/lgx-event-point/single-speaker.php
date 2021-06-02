@@ -10,7 +10,7 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main g"> 
+		<main id="main" class="site-main"> 
 			<section>
 			    <div id="lgx-speaker-single" class="lgx-speakers lgx-speaker-single">
 			        <div class="lgx-inner">
