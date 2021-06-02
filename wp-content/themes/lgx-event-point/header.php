@@ -57,7 +57,7 @@
                                                     <span class="icon-bar"></span>
                                                     <span class="icon-bar"></span>
                                                 </button>
-                                                <div class="lgx-logo e">
+                                                <div class="lgx-logo p">
                                                     <a href="<?php echo esc_url(home_url('/')); ?>" class="lgx-scroll">
                                                         <img src="<?php echo esc_url($lgx_event_point_logo); ?>" alt="Logo"/>
                                                     </a>
